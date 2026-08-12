@@ -1,29 +1,159 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, StatusBar, Animated } from 'react-native';
 import { useLanguage } from '../contexts/LanguageContext';
 import { LanguageCode } from '../data/translations';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { AnimatedCard } from '../components/AnimatedCard';
+import { Audio } from 'expo-av';
+
+interface LangOption {
+  code: LanguageCode;
+  name: string;
+  nativeName: string;
+}
+
+const languages: LangOption[] = [
+  { code: 'en', name: 'English', nativeName: 'English' },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिंदी' },
+  { code: 'mr', name: 'Marathi', nativeName: 'मराठी' },
+  { code: 'mai', name: 'Maithili', nativeName: 'मैथिली' },
+  { code: 'bho', name: 'Bhojpuri', nativeName: 'भोजपुरी' },
+  { code: 'bn', name: 'Bengali', nativeName: 'বাংলা' },
+];
+
+const audioFiles: Record<string, any> = {
+  en: require('../assets/audio/english.wav'),
+  hi: require('../assets/audio/hindi.wav'),
+  mr: require('../assets/audio/marathi.wav'),
+  mai: require('../assets/audio/maithili.wav'),
+  bho: require('../assets/audio/bhojpuri.wav'),
+  bn: require('../assets/audio/bengali.wav'),
+};
 
 const LanguageSelectionScreen = () => {
   const { setLanguage } = useLanguage();
+  const [speakingCode, setSpeakingCode] = useState<LanguageCode | null>(null);
+  const [isPlayingSequence, setIsPlayingSequence] = useState(false);
 
-  const languages: { code: LanguageCode; name: string; nativeName: string }[] = [
-    { code: 'en', name: 'English', nativeName: 'English' },
-    { code: 'hi', name: 'Hindi', nativeName: 'हिंदी' },
-    { code: 'mr', name: 'Marathi', nativeName: 'मराठी' },
-    { code: 'mai', name: 'Maithili', nativeName: 'मैथिली' },
-    { code: 'bho', name: 'Bhojpuri', nativeName: 'भोजपुरी' },
-    { code: 'bn', name: 'Bengali', nativeName: 'বাংলা' }
-  ];
+  const isMountedRef = useRef(true);
+  const currentSoundRef = useRef<Audio.Sound | null>(null);
+
+  const highlightAnims = useRef<Record<string, Animated.Value>>({
+    en: new Animated.Value(0),
+    hi: new Animated.Value(0),
+    mr: new Animated.Value(0),
+    mai: new Animated.Value(0),
+    bho: new Animated.Value(0),
+    bn: new Animated.Value(0),
+  }).current;
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    startAudioSequence();
+
+    return () => {
+      isMountedRef.current = false;
+      stopAudio();
+    };
+  }, []);
+
+  useEffect(() => {
+    languages.forEach((lang) => {
+      Animated.timing(highlightAnims[lang.code], {
+        toValue: lang.code === speakingCode ? 1 : 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    });
+  }, [speakingCode]);
+
+  const stopAudio = async () => {
+    isMountedRef.current = false;
+    try {
+      if (currentSoundRef.current) {
+        await currentSoundRef.current.stopAsync();
+        await currentSoundRef.current.unloadAsync();
+        currentSoundRef.current = null;
+      }
+    } catch (e) {}
+  };
+
+  const startAudioSequence = async () => {
+    await stopAudio();
+    isMountedRef.current = true;
+    setIsPlayingSequence(true);
+
+    for (let i = 0; i < languages.length; i++) {
+      if (!isMountedRef.current) break;
+
+      const lang = languages[i];
+      setSpeakingCode(lang.code);
+
+      await playAudioTrack(lang.code);
+
+      if (!isMountedRef.current) break;
+      await new Promise((res) => setTimeout(res, 200));
+    }
+
+    if (isMountedRef.current) {
+      setSpeakingCode(null);
+      setIsPlayingSequence(false);
+    }
+  };
+
+  const playAudioTrack = (code: LanguageCode): Promise<void> => {
+    return new Promise(async (resolve) => {
+      let resolved = false;
+      const finish = async () => {
+        if (!resolved) {
+          resolved = true;
+          if (currentSoundRef.current) {
+            try {
+              await currentSoundRef.current.unloadAsync();
+            } catch (e) {}
+            currentSoundRef.current = null;
+          }
+          resolve();
+        }
+      };
+
+      const timeout = setTimeout(finish, 2500);
+
+      try {
+        if (currentSoundRef.current) {
+          await currentSoundRef.current.stopAsync();
+          await currentSoundRef.current.unloadAsync();
+          currentSoundRef.current = null;
+        }
+
+        const { sound } = await Audio.Sound.createAsync(
+          audioFiles[code],
+          { shouldPlay: true },
+          (status) => {
+            if (status.isLoaded && status.didJustFinish) {
+              clearTimeout(timeout);
+              finish();
+            }
+          }
+        );
+
+        currentSoundRef.current = sound;
+      } catch (err) {
+        clearTimeout(timeout);
+        finish();
+      }
+    });
+  };
 
   const handleLanguageSelect = async (code: LanguageCode) => {
+    await stopAudio();
     await setLanguage(code);
     router.replace('/home');
   };
 
-  const handleBack = () => {
+  const handleBack = async () => {
+    await stopAudio();
     if (router.canGoBack()) {
       router.back();
     } else {
@@ -35,13 +165,23 @@ const LanguageSelectionScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       
-      {/* Top Header with Back Button */}
       <View style={styles.header}>
         <AnimatedCard onPress={handleBack} style={styles.backButton}>
           <Ionicons name="arrow-back" size={22} color="#0F172A" />
         </AnimatedCard>
+
         <Text style={styles.headerTitle}>Language / भाषा</Text>
-        <View style={{ width: 40 }} />
+
+        <AnimatedCard 
+          onPress={startAudioSequence} 
+          style={[styles.audioButton, isPlayingSequence && styles.audioButtonActive]}
+        >
+          <Ionicons 
+            name={isPlayingSequence ? "volume-high" : "volume-medium-outline"} 
+            size={18} 
+            color={isPlayingSequence ? "#B45309" : "#334155"} 
+          />
+        </AnimatedCard>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -53,16 +193,60 @@ const LanguageSelectionScreen = () => {
         <Text style={styles.subtitle}>अपनी भाषा चुनें</Text>
         
         <View style={styles.grid}>
-          {languages.map((lang) => (
-            <AnimatedCard
-              key={lang.code}
-              style={styles.languageButton}
-              onPress={() => handleLanguageSelect(lang.code)}
-            >
-              <Text style={styles.nativeText}>{lang.nativeName}</Text>
-              <Text style={styles.englishText}>{lang.name}</Text>
-            </AnimatedCard>
-          ))}
+          {languages.map((lang) => {
+            const isSpeaking = speakingCode === lang.code;
+            const anim = highlightAnims[lang.code];
+
+            const backgroundColor = anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['#FFFFFF', '#FFFBEB'],
+            });
+
+            const borderColor = anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['#E2E8F0', '#F59E0B'],
+            });
+
+            const borderWidth = anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 2],
+            });
+
+            return (
+              <Animated.View
+                key={lang.code}
+                style={[
+                  styles.cardWrapper,
+                  {
+                    backgroundColor,
+                    borderColor,
+                    borderWidth,
+                  },
+                  isSpeaking && styles.metallicGlassHighlight,
+                ]}
+              >
+                <AnimatedCard
+                  style={styles.languageButtonInner}
+                  onPress={() => handleLanguageSelect(lang.code)}
+                >
+                  {isSpeaking && <View style={styles.glassSheen} />}
+
+                  {isSpeaking && (
+                    <View style={styles.speakerBadge}>
+                      <Ionicons name="volume-medium" size={14} color="#B45309" />
+                    </View>
+                  )}
+
+                  <Text style={[styles.nativeText, isSpeaking && styles.goldText]}>
+                    {lang.nativeName}
+                  </Text>
+                  <Text style={[styles.englishText, isSpeaking && styles.goldSubtext]}>
+                    {lang.name}
+                  </Text>
+                </AnimatedCard>
+              </Animated.View>
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -96,6 +280,25 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#0F172A',
     letterSpacing: -0.3,
+  },
+  audioButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#F8FAFC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+  },
+  audioButtonActive: {
+    backgroundColor: '#FFFBEB',
+    borderColor: '#F59E0B',
+    shadowColor: '#F59E0B',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
   },
   scrollContent: {
     paddingHorizontal: 24,
@@ -134,22 +337,53 @@ const styles = StyleSheet.create({
     gap: 16,
     width: '100%',
   },
-  languageButton: {
+  cardWrapper: {
     width: '47.5%',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 22,
-    paddingHorizontal: 16,
     borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    gap: 4,
+    backgroundColor: '#FFFFFF',
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.03,
     shadowRadius: 8,
     elevation: 2,
+  },
+  languageButtonInner: {
+    width: '100%',
+    paddingVertical: 22,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    position: 'relative',
+  },
+  metallicGlassHighlight: {
+    shadowColor: '#F59E0B',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  glassSheen: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 6,
+    backgroundColor: 'rgba(254, 243, 199, 0.9)',
+  },
+  speakerBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#FEF3C7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#F59E0B',
   },
   nativeText: {
     fontSize: 20,
@@ -160,6 +394,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
     color: '#64748B',
+  },
+  goldText: {
+    color: '#78350F',
+    fontWeight: '800',
+  },
+  goldSubtext: {
+    color: '#92400E',
+    fontWeight: '600',
   },
 });
 
