@@ -23,13 +23,30 @@ const LanguageSelectionScreen = () => {
     router.replace('/home');
   };
 
+  const handleBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/home');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      
+      {/* Top Header with Back Button */}
+      <View style={styles.header}>
+        <AnimatedCard onPress={handleBack} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={22} color="#0F172A" />
+        </AnimatedCard>
+        <Text style={styles.headerTitle}>Language / भाषा</Text>
+        <View style={{ width: 40 }} />
+      </View>
+
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
         <View style={styles.globeHeaderIcon}>
-          <Ionicons name="globe-outline" size={48} color="#36D1B6" />
+          <Ionicons name="globe-outline" size={44} color="#334155" />
         </View>
 
         <Text style={styles.title}>Select Language</Text>
@@ -57,23 +74,46 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F1F5F9',
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#F8FAFC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#0F172A',
+    letterSpacing: -0.3,
+  },
   scrollContent: {
     paddingHorizontal: 24,
-    paddingTop: 36,
+    paddingTop: 24,
     paddingBottom: 40,
     alignItems: 'center',
   },
   globeHeaderIcon: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    backgroundColor: '#E6F9F5',
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: '800',
     color: '#0F172A',
     letterSpacing: -0.5,
@@ -81,10 +121,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '500',
     color: '#64748B',
-    marginBottom: 36,
+    marginBottom: 32,
     textAlign: 'center',
   },
   grid: {
@@ -103,7 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#F1F5F9',
+    borderColor: '#E2E8F0',
     gap: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

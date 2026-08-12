@@ -4,6 +4,7 @@ import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-ico
 import { useLanguage } from '../contexts/LanguageContext';
 import { router } from 'expo-router';
 import { AnimatedCard } from '../components/AnimatedCard';
+import { PageTransition } from '../components/PageTransition';
 import emergenciesData from '../data/emergencies.json';
 
 const HomeScreen = () => {
@@ -53,7 +54,8 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <PageTransition>
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* Header */}
         <View style={styles.header}>
@@ -130,6 +132,7 @@ const HomeScreen = () => {
           ))}
         </View>
       </ScrollView>
+      </PageTransition>
     </SafeAreaView>
   );
 };
