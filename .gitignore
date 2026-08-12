@@ -1,0 +1,88 @@
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+backend/venv/
+backend/.venv/
+
+# Environment and Credentials
+.env
+.env.*
+*.env
+!.env.example
+*token.json*
+*credentials.json*
+
+# Expo & Metro
+.expo/
+.expo-shared/
+.metro-cache/
+**/ .metro-cache/
+web-build/
+dist/
+build/
+expo-env.d.ts
+*.tsbuildinfo
+.metro-health-check*
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs & Caches
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Tooling and Temporary Artifacts
+.emergent/
+.antigravity/
+.gemini/
+
+# Native Mobile Build Artifacts
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+.kotlin/
+ios/Pods/
+ios/build/
+android/.gradle/
+android/app/build/
+android/build/
