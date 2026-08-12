@@ -5,6 +5,7 @@ import { LanguageCode } from '../data/translations';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { AnimatedCard } from '../components/AnimatedCard';
+import { PageTransition } from '../components/PageTransition';
 import { Audio } from 'expo-av';
 
 interface LangOption {
@@ -50,10 +51,17 @@ const LanguageSelectionScreen = () => {
 
   useEffect(() => {
     isMountedRef.current = true;
-    startAudioSequence();
+
+    // 3.5-second calm pause before starting voice audio sequence
+    const initialDelayTimer = setTimeout(() => {
+      if (isMountedRef.current) {
+        startAudioSequence();
+      }
+    }, 3500);
 
     return () => {
       isMountedRef.current = false;
+      clearTimeout(initialDelayTimer);
       stopAudio();
     };
   }, []);
@@ -62,7 +70,7 @@ const LanguageSelectionScreen = () => {
     languages.forEach((lang) => {
       Animated.timing(highlightAnims[lang.code], {
         toValue: lang.code === speakingCode ? 1 : 0,
-        duration: 300,
+        duration: 400,
         useNativeDriver: false,
       }).start();
     });
@@ -93,7 +101,7 @@ const LanguageSelectionScreen = () => {
       await playAudioTrack(lang.code);
 
       if (!isMountedRef.current) break;
-      await new Promise((res) => setTimeout(res, 200));
+      await new Promise((res) => setTimeout(res, 500));
     }
 
     if (isMountedRef.current) {
@@ -118,7 +126,7 @@ const LanguageSelectionScreen = () => {
         }
       };
 
-      const timeout = setTimeout(finish, 2500);
+      const timeout = setTimeout(finish, 3000);
 
       try {
         if (currentSoundRef.current) {
@@ -164,6 +172,7 @@ const LanguageSelectionScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <PageTransition>
       
       <View style={styles.header}>
         <AnimatedCard onPress={handleBack} style={styles.backButton}>
@@ -249,6 +258,7 @@ const LanguageSelectionScreen = () => {
           })}
         </View>
       </ScrollView>
+      </PageTransition>
     </SafeAreaView>
   );
 };

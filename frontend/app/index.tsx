@@ -1,21 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HealIcon } from '../components/HealIcon';
-
-const LANGUAGE_STORAGE_KEY = '@helpmate_language';
 
 export default function Index() {
   const router = useRouter();
 
-  
   const logoScale = useRef(new Animated.Value(0.85)).current;
   const logoOpacity = useRef(new Animated.Value(0)).current;
   const contentOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    
     Animated.sequence([
       Animated.parallel([
         Animated.timing(logoScale, {
@@ -37,33 +32,17 @@ export default function Index() {
       }),
     ]).start();
 
-    
     const timer = setTimeout(() => {
-      checkLanguagePreference();
+      router.replace('/language-select');
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  const checkLanguagePreference = async () => {
-    try {
-      const savedLanguage = await AsyncStorage.getItem(LANGUAGE_STORAGE_KEY);
-      if (savedLanguage) {
-        router.replace('/home');
-      } else {
-        router.replace('/language-select');
-      }
-    } catch (error) {
-      console.error('Error checking language preference:', error);
-      router.replace('/language-select');
-    }
-  };
-
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
 
-      {}
       <View style={styles.centerSection}>
         <Animated.View
           style={{
@@ -80,7 +59,6 @@ export default function Index() {
         </Animated.View>
       </View>
 
-      {}
       <Animated.View style={[styles.footer, { opacity: contentOpacity }]}>
         <View style={styles.loaderBar}>
           <View style={styles.loaderProgress} />

@@ -9,11 +9,11 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           animation: 'slide_from_right',
-          animationDuration: 250,
+          animationDuration: 450,
         }}
       >
         <Stack.Screen name="index" options={{ animation: 'fade' }} />
-        <Stack.Screen name="language-select" options={{ animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="language-select" options={{ animation: 'fade' }} />
         <Stack.Screen name="home" options={{ animation: 'fade' }} />
         <Stack.Screen name="all-emergencies" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="cpr-selection" options={{ animation: 'slide_from_right' }} />
