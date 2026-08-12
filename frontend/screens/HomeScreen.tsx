@@ -1,15 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Linking, Alert } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, Linking, StatusBar, Alert } from 'react-native';
+import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router } from 'expo-router';
+import { AnimatedCard } from '../components/AnimatedCard';
 import emergenciesData from '../data/emergencies.json';
 
 const HomeScreen = () => {
-  const { t, setLanguage, language } = useLanguage();
+  const { t, language } = useLanguage();
 
-  const handleEmergencyCall = () => {
-    Linking.openURL('tel:112');
+  const handleEmergencyCall = async () => {
+    const phoneUrl = 'tel:112';
+    try {
+      const supported = await Linking.canOpenURL(phoneUrl);
+      if (supported) {
+        await Linking.openURL(phoneUrl);
+      } else {
+        Alert.alert(
+          'Emergency Call (112)',
+          'Calling 112 is not supported on this device/simulator. Please dial 112 on your phone.',
+          [{ text: 'OK' }]
+        );
+      }
+    } catch (error) {
+      Alert.alert(
+        'Emergency Call (112)',
+        'Please dial 112 on your phone for emergency assistance.',
+        [{ text: 'OK' }]
+      );
+    }
   };
 
   const handleLanguageSwitch = () => {
@@ -17,13 +36,12 @@ const HomeScreen = () => {
   };
 
   const criticalEmergencies = [
-    { id: 'bleeding', icon: 'water', color: '#E74C3C', iconSet: 'Ionicons' },
-    { id: 'heart_attack', icon: 'heart', color: '#E74C3C', iconSet: 'Ionicons' },
-    { id: 'choking', icon: 'alert-circle', color: '#F39C12', iconSet: 'Ionicons' },
-    { id: 'shock', icon: 'flash', color: '#9B59B6', iconSet: 'Ionicons' }
+    { id: 'bleeding' },
+    { id: 'heart_attack' },
+    { id: 'choking' },
+    { id: 'shock' }
   ];
 
-  
   const getEmergencyTitle = (emergencyId: string) => {
     const emergency = emergenciesData.emergencies.find((e: any) => e.id === emergencyId);
     if (emergency && emergency.title) {
@@ -34,72 +52,81 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        {}
+      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        
+        {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>HelpMate</Text>
-          <TouchableOpacity onPress={handleLanguageSwitch} style={styles.languageButton}>
-            <Ionicons name="globe-outline" size={24} color="#34495E" />
+          <AnimatedCard onPress={handleLanguageSwitch} style={styles.languageButton}>
+            <Ionicons name="globe-outline" size={18} color="#334155" />
             <Text style={styles.languageText}>{language.toUpperCase()}</Text>
-          </TouchableOpacity>
+          </AnimatedCard>
         </View>
 
-        {}
+        {/* Hero Section */}
         <View style={styles.heroSection}>
           <View style={styles.iconCircle}>
-            <Ionicons name="heart" size={60} color="#4ECDC4" />
+            <MaterialCommunityIcons name="heart-pulse" size={44} color="#334155" />
           </View>
-          <Text style={styles.appTitle}>{t.home.title}</Text>
-          <Text style={styles.appSubtitle}>{t.home.subtitle}</Text>
+          <Text style={styles.appTitle}>HelpMate</Text>
+          <Text style={styles.appSubtitle}>First Aid for Everyone</Text>
         </View>
 
-        {}
-        <TouchableOpacity style={styles.emergencyButton} onPress={handleEmergencyCall} activeOpacity={0.8}>
-          <Ionicons name="call" size={24} color="#FFFFFF" />
+        {/* Emergency Call Button */}
+        <AnimatedCard onPress={handleEmergencyCall} style={styles.emergencyButton} scaleTo={0.97}>
+          <Ionicons name="call" size={22} color="#FFFFFF" />
           <Text style={styles.emergencyButtonText}>{t.home.callEmergency}</Text>
-        </TouchableOpacity>
+        </AnimatedCard>
 
-        {}
+        {/* Disclaimer */}
         <Text style={styles.disclaimer}>{t.home.disclaimer}</Text>
 
-        {}
+        {/* Quick Actions */}
         <Text style={styles.sectionTitle}>{t.home.quickActions}</Text>
         <View style={styles.quickActionsContainer}>
-          <TouchableOpacity 
+          <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/all-emergencies')}
-            activeOpacity={0.7}
           >
-            <Ionicons name="alert-circle" size={40} color="#E74C3C" />
+            <View style={styles.actionIconCircle}>
+              <Ionicons name="alert-circle-outline" size={30} color="#334155" />
+            </View>
             <Text style={styles.quickActionText}>{t.home.allEmergencies}</Text>
-          </TouchableOpacity>
+          </AnimatedCard>
 
-          <TouchableOpacity 
+          <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/symptom-checker')}
-            activeOpacity={0.7}
           >
-            <MaterialCommunityIcons name="stethoscope" size={40} color="#4ECDC4" />
+            <View style={styles.actionIconCircle}>
+              <MaterialCommunityIcons name="stethoscope" size={30} color="#334155" />
+            </View>
             <Text style={styles.quickActionText}>{t.home.checkSymptoms}</Text>
-          </TouchableOpacity>
+          </AnimatedCard>
         </View>
 
-        {}
+        {/* Critical Section */}
         <View style={styles.criticalHeader}>
           <View style={styles.criticalDot} />
-          <Text style={styles.sectionTitle}>{t.home.critical}</Text>
+          <Text style={styles.criticalTitle}>{t.home.critical}</Text>
         </View>
+        
         <View style={styles.criticalGrid}>
-          {criticalEmergencies.map((emergency) => (
-            <TouchableOpacity
-              key={emergency.id}
+          {criticalEmergencies.map((item) => (
+            <AnimatedCard
+              key={item.id}
               style={styles.criticalCard}
-              onPress={() => router.push(`/emergency-guide?id=${emergency.id}`)}
-              activeOpacity={0.7}
+              onPress={() => router.push(`/emergency-guide?id=${item.id}`)}
             >
-              <Ionicons name={emergency.icon as any} size={36} color={emergency.color} />
-              <Text style={styles.criticalCardText}>{getEmergencyTitle(emergency.id)}</Text>
-            </TouchableOpacity>
+              <View style={styles.criticalIconContainer}>
+                {item.id === 'bleeding' && <FontAwesome5 name="tint" size={26} color="#334155" />}
+                {item.id === 'heart_attack' && <FontAwesome5 name="heart" size={26} color="#334155" />}
+                {item.id === 'choking' && <FontAwesome5 name="wind" size={26} color="#334155" />}
+                {item.id === 'shock' && <FontAwesome5 name="bolt" size={26} color="#334155" />}
+              </View>
+              <Text style={styles.criticalCardText}>{getEmergencyTitle(item.id)}</Text>
+            </AnimatedCard>
           ))}
         </View>
       </ScrollView>
@@ -110,147 +137,185 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   scrollContent: {
-    padding: 20
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 40,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 24
+    marginBottom: 28,
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#2C3E50'
+    fontWeight: '800',
+    color: '#0F172A',
+    letterSpacing: -0.5,
   },
   languageButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ECF0F1',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    backgroundColor: '#F1F5F9',
+    paddingHorizontal: 14,
+    paddingVertical: 7,
     borderRadius: 20,
-    gap: 6
+    gap: 6,
   },
   languageText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#34495E'
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#334155',
   },
   heroSection: {
     alignItems: 'center',
-    marginBottom: 32
+    marginBottom: 28,
   },
   iconCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#E8F8F5',
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16
+    marginBottom: 20,
   },
   appTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 8
+    fontSize: 30,
+    fontWeight: '800',
+    color: '#0F172A',
+    letterSpacing: -0.5,
+    marginBottom: 6,
   },
   appSubtitle: {
-    fontSize: 16,
-    color: '#7F8C8D'
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#64748B',
   },
   emergencyButton: {
     flexDirection: 'row',
-    backgroundColor: '#E74C3C',
-    padding: 18,
-    borderRadius: 12,
+    backgroundColor: '#B91C1C',
+    height: 56,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 32,
-    gap: 12,
+    gap: 10,
+    shadowColor: '#B91C1C',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
     elevation: 4,
-    shadowColor: '#E74C3C',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6
   },
   emergencyButtonText: {
     color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold'
+    fontSize: 17,
+    fontWeight: '700',
   },
   disclaimer: {
     fontSize: 12,
-    color: '#7F8C8D',
+    color: '#94A3B8',
     textAlign: 'center',
-    marginBottom: 24,
-    paddingHorizontal: 8,
-    lineHeight: 16
+    marginTop: 12,
+    marginBottom: 32,
+    paddingHorizontal: 12,
+    lineHeight: 18,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 16
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#0F172A',
+    marginBottom: 16,
   },
   quickActionsContainer: {
     flexDirection: 'row',
     gap: 16,
-    marginBottom: 32
+    marginBottom: 32,
   },
   quickActionCard: {
     flex: 1,
+    height: 160,
     backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 12,
+    paddingHorizontal: 16,
+    borderRadius: 20,
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#ECF0F1',
-    gap: 12
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    gap: 14,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.03,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  actionIconCircle: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    backgroundColor: '#F8FAFC',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   quickActionText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#34495E',
-    textAlign: 'center'
+    color: '#1E293B',
+    textAlign: 'center',
   },
   criticalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    marginBottom: 16
+    marginBottom: 16,
   },
   criticalDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#E74C3C'
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#B91C1C',
+    marginRight: 8,
+  },
+  criticalTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#0F172A',
   },
   criticalGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 16
+    justifyContent: 'space-between',
+    gap: 14,
   },
   criticalCard: {
-    width: '47%',
+    width: '47.5%',
+    height: 160,
     backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 12,
+    paddingHorizontal: 14,
+    borderRadius: 20,
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#ECF0F1',
-    gap: 12
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    gap: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.03,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  criticalIconContainer: {
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   criticalCardText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#34495E',
-    textAlign: 'center'
-  }
+    color: '#1E293B',
+    textAlign: 'center',
+  },
 });
 
 export default HomeScreen;

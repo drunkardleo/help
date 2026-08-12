@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import { useLanguage } from '../contexts/LanguageContext';
 import { LanguageCode } from '../data/translations';
 import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { AnimatedCard } from '../components/AnimatedCard';
 
 const LanguageSelectionScreen = () => {
-  const { setLanguage, t } = useLanguage();
+  const { setLanguage } = useLanguage();
 
-  const languages: { code: LanguageCode; name: string }[] = [
-    { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
-    { code: 'mr', name: 'मराठी' },
-    { code: 'mai', name: 'मैथिली' },
-    { code: 'bho', name: 'भोजपुरी' },
-    { code: 'bn', name: 'বাংলা' }
+  const languages: { code: LanguageCode; name: string; nativeName: string }[] = [
+    { code: 'en', name: 'English', nativeName: 'English' },
+    { code: 'hi', name: 'Hindi', nativeName: 'हिंदी' },
+    { code: 'mr', name: 'Marathi', nativeName: 'मराठी' },
+    { code: 'mai', name: 'Maithili', nativeName: 'मैथिली' },
+    { code: 'bho', name: 'Bhojpuri', nativeName: 'भोजपुरी' },
+    { code: 'bn', name: 'Bengali', nativeName: 'বাংলা' }
   ];
 
   const handleLanguageSelect = async (code: LanguageCode) => {
@@ -23,20 +25,26 @@ const LanguageSelectionScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.title}>भाषाएँ</Text>
-        <Text style={styles.subtitle}>Languages</Text>
+      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        
+        <View style={styles.globeHeaderIcon}>
+          <Ionicons name="globe-outline" size={48} color="#36D1B6" />
+        </View>
+
+        <Text style={styles.title}>Select Language</Text>
+        <Text style={styles.subtitle}>अपनी भाषा चुनें</Text>
         
         <View style={styles.grid}>
           {languages.map((lang) => (
-            <TouchableOpacity
+            <AnimatedCard
               key={lang.code}
               style={styles.languageButton}
               onPress={() => handleLanguageSelect(lang.code)}
-              activeOpacity={0.7}
             >
-              <Text style={styles.languageText}>{lang.name}</Text>
-            </TouchableOpacity>
+              <Text style={styles.nativeText}>{lang.nativeName}</Text>
+              <Text style={styles.englishText}>{lang.name}</Text>
+            </AnimatedCard>
           ))}
         </View>
       </ScrollView>
@@ -47,23 +55,37 @@ const LanguageSelectionScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   scrollContent: {
-    padding: 24,
-    alignItems: 'center'
+    paddingHorizontal: 24,
+    paddingTop: 36,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  globeHeaderIcon: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: '#E6F9F5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginTop: 40,
-    marginBottom: 8
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#0F172A',
+    letterSpacing: -0.5,
+    marginBottom: 6,
+    textAlign: 'center',
   },
   subtitle: {
-    fontSize: 18,
-    color: '#7F8C8D',
-    marginBottom: 40
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#64748B',
+    marginBottom: 36,
+    textAlign: 'center',
   },
   grid: {
     flexDirection: 'row',
@@ -71,27 +93,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 16,
     width: '100%',
-    maxWidth: 400
   },
   languageButton: {
-    width: '45%',
-    minWidth: 140,
-    backgroundColor: '#3498DB',
-    padding: 24,
+    width: '47.5%',
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 22,
+    paddingHorizontal: 16,
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+    gap: 4,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.03,
+    shadowRadius: 8,
+    elevation: 2,
   },
-  languageText: {
+  nativeText: {
     fontSize: 20,
-    fontWeight: '600',
-    color: '#FFFFFF'
-  }
+    fontWeight: '700',
+    color: '#0F172A',
+  },
+  englishText: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#64748B',
+  },
 });
 
 export default LanguageSelectionScreen;
