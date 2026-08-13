@@ -20,7 +20,8 @@ export const translations = {
       quickActions: "Quick Actions",
       allEmergencies: "All Emergencies",
       checkSymptoms: "Check Symptoms",
-      critical: "Critical"
+      critical: "Critical",
+      sosSubtitle: "Send location to contacts"
     },
     emergencies: {
       title: "All Emergencies",
@@ -60,6 +61,28 @@ export const translations = {
       recommended: "Recommended Action",
       viewGuide: "View Emergency Guide",
       selectAtLeastOne: "Please select at least one symptom"
+    },
+    sos: {
+      title: "SOS",
+      subtitle: "Long-press the red button to send your live location to your emergency contacts.",
+      holdToSend: "Hold the button to send SOS",
+      locationLoading: "Getting your location...",
+      locationReady: "Location ready",
+      locationError: "Could not get location. SMS will be sent without coordinates.",
+      locationIdle: "Location will be shared when SOS is triggered",
+      locationUnavailable: "(location unavailable)",
+      smsNotAvailable: "SMS is not available on this device. Share this message manually:",
+      smsFailed: "Failed to send the SMS. Please try again.",
+      noRecipients: "Add at least one emergency contact before sending SOS.",
+      noContacts: "No emergency contacts yet. Add one below.",
+      contactsTitle: "Emergency Contacts",
+      addContact: "Add Emergency Contact",
+      namePlaceholder: "e.g. Mom",
+      numberPlaceholder: "10-digit number",
+      invalidNumber: "Please enter a valid 10-digit phone number.",
+      invalidName: "Please enter a contact name.",
+      offlineNote: "SOS works without internet — SMS and GPS use the cellular network.",
+      smsBody: "🚨 SOS from HelpMate: I need help! My location:"
     }
   },
   hi: {
@@ -80,7 +103,8 @@ export const translations = {
       quickActions: "त्वरित कार्य",
       allEmergencies: "सभी आपातकाल",
       checkSymptoms: "लक्षण जांचें",
-      critical: "गंभीर"
+      critical: "गंभीर",
+      sosSubtitle: "संपर्कों को स्थान भेजें"
     },
     emergencies: {
       title: "सभी आपातकाल",
@@ -120,6 +144,28 @@ export const translations = {
       recommended: "अनुशंसित कार्रवाई",
       viewGuide: "आपातकालीन गाइड देखें",
       selectAtLeastOne: "कृपया कम से कम एक लक्षण चुनें"
+    },
+    sos: {
+      title: "आपातकाल (SOS)",
+      subtitle: "अपने आपातकालीन संपर्कों को अपना लाइव स्थान भेजने के लिए लाल बटन दबाए रखें।",
+      holdToSend: "SOS भेजने के लिए बटन दबाए रखें",
+      locationLoading: "आपका स्थान प्राप्त हो रहा है...",
+      locationReady: "स्थान तैयार है",
+      locationError: "स्थान प्राप्त नहीं हो सका। SMS निर्देशांक के बिना भेजा जाएगा।",
+      locationIdle: "SOS ट्रिगर होने पर स्थान साझा किया जाएगा",
+      locationUnavailable: "(स्थान उपलब्ध नहीं)",
+      smsNotAvailable: "इस डिवाइस पर SMS उपलब्ध नहीं है। यह संदेश मैन्युअल रूप से साझा करें:",
+      smsFailed: "SMS भेजने में विफल रहा। कृपया पुनः प्रयास करें।",
+      noRecipients: "SOS भेजने से पहले कम से कम एक आपातकालीन संपर्क जोड़ें।",
+      noContacts: "अभी कोई आपातकालीन संपर्क नहीं है। नीचे एक जोड़ें।",
+      contactsTitle: "आपातकालीन संपर्क",
+      addContact: "आपातकालीन संपर्क जोड़ें",
+      namePlaceholder: "जैसे: माँ",
+      numberPlaceholder: "10 अंकों का नंबर",
+      invalidNumber: "कृपया एक मान्य 10-अंकों वाला फ़ोन नंबर दर्ज करें।",
+      invalidName: "कृपया संपर्क का नाम दर्ज करें।",
+      offlineNote: "SOS बिना इंटरनेट के काम करता है — SMS और GPS सेलुलर नेटवर्क का उपयोग करते हैं।",
+      smsBody: "🚨 हेल्पमेट से SOS: मुझे मदद चाहिए! मेरा स्थान:"
     }
   },
   mr: {
@@ -140,7 +186,8 @@ export const translations = {
       quickActions: "जलद क्रिया",
       allEmergencies: "सर्व आपत्काल",
       checkSymptoms: "लक्षणे तपासा",
-      critical: "गंभीर"
+      critical: "गंभीर",
+      sosSubtitle: "संपर्कांना ठिकाण पाठवा"
     },
     emergencies: {
       title: "सर्व आपत्काल",
@@ -180,6 +227,28 @@ export const translations = {
       recommended: "शिफारस केलेली कृती",
       viewGuide: "आपत्कालीन मार्गदर्शक पहा",
       selectAtLeastOne: "कृपया किमान एक लक्षण निवडा"
+    },
+    sos: {
+      title: "आपत्कालीन (SOS)",
+      subtitle: "तुमच्या आपत्कालीन संपर्कांना तुमचे लाइव ठिकाण पाठवण्यासाठी लाल बटण दाबून ठेवा.",
+      holdToSend: "SOS पाठवण्यासाठी बटण दाबून ठेवा",
+      locationLoading: "तुमचे ठिकाण मिळवत आहे...",
+      locationReady: "ठिकाण तयार आहे",
+      locationError: "ठिकाण मिळू शकले नाही. SMS निर्देशांकांशिवाय पाठवला जाईल.",
+      locationIdle: "SOS ट्रिगर झाल्यावर ठिकाण सामायिक केले जाईल",
+      locationUnavailable: "(ठिकाण उपलब्ध नाही)",
+      smsNotAvailable: "या डिव्हाइसवर SMS उपलब्ध नाही. हा संदेश स्वतः सामायिक करा:",
+      smsFailed: "SMS पाठवण्यात अपयश आले. कृपया पुन्हा प्रयत्न करा.",
+      noRecipients: "SOS पाठवण्यापूर्वी किमान एक आपत्कालीन संपर्क जोडा.",
+      noContacts: "अद्याप कोणतेही आपत्कालीन संपर्क नाहीत. खाली एक जोडा.",
+      contactsTitle: "आपत्कालीन संपर्क",
+      addContact: "आपत्कालीन संपर्क जोडा",
+      namePlaceholder: "उदा. आई",
+      numberPlaceholder: "10-अंकी क्रमांक",
+      invalidNumber: "कृपया वैध 10-अंकी फोन क्रमांक प्रविष्ट करा.",
+      invalidName: "कृपया संपर्काचे नाव प्रविष्ट करा.",
+      offlineNote: "SOS इंटरनेटशिवाय कार्य करते — SMS आणि GPS सेल्युलर नेटवर्क वापरतात.",
+      smsBody: "🚨 हेल्पमेटकडून SOS: मला मदत हवी आहे! माझे ठिकाण:"
     }
   },
   mai: {
@@ -200,7 +269,8 @@ export const translations = {
       quickActions: "तुरंत कार्य",
       allEmergencies: "सभ आपातकाल",
       checkSymptoms: "लक्षण जाँचू",
-      critical: "गंभीर"
+      critical: "गंभीर",
+      sosSubtitle: "संपर्क सभके स्थान पठाऊ"
     },
     emergencies: {
       title: "सभ आपातकाल",
@@ -240,6 +310,28 @@ export const translations = {
       recommended: "अनुशंसित कार्य",
       viewGuide: "आपातकालीन गाइड देखू",
       selectAtLeastOne: "कृपया कम सँ कम एकटा लक्षण चुनू"
+    },
+    sos: {
+      title: "आपातकाल (SOS)",
+      subtitle: "अपन आपातकालीन संपर्क सभके अपन लाइव स्थान पठेबाक लेल लाल बटन दबा क रखू।",
+      holdToSend: "SOS पठेबाक लेल बटन दबा क रखू",
+      locationLoading: "अहाँक स्थान प्राप्त हो रहल अछि...",
+      locationReady: "स्थान तैयार अछि",
+      locationError: "स्थान प्राप्त नै भऽ सकल। SMS निर्देशांक बिना पठाओल जेत।",
+      locationIdle: "SOS ट्रिगर होयला पर स्थान साझा कयल जेत",
+      locationUnavailable: "(स्थान उपलब्ध नै)",
+      smsNotAvailable: "ई डिवाइस पर SMS उपलब्ध नै अछि। ई संदेश अपन हाथ सँ साझा करू:",
+      smsFailed: "SMS पठेबा मे विफल भेल। कृपया फेर प्रयास करू।",
+      noRecipients: "SOS पठेबा सँ पहिने कम सँ कम एकटा आपातकालीन संपर्क जोड़ू।",
+      noContacts: "अखन धरि कोनो आपातकालीन संपर्क नै अछि। नीचा एकटा जोड़ू।",
+      contactsTitle: "आपातकालीन संपर्क",
+      addContact: "आपातकालीन संपर्क जोड़ू",
+      namePlaceholder: "जेना: माँ",
+      numberPlaceholder: "10 अंकक नंबर",
+      invalidNumber: "कृपया वैध 10-अंकक फोन नंबर भरू।",
+      invalidName: "कृपया संपर्कक नाम भरू।",
+      offlineNote: "SOS बिना इंटरनेट काम करैत अछि — SMS आर GPS सेल्युलर नेटवर्क उपयोग करैत अछि।",
+      smsBody: "🚨 हेल्पमेट सँ SOS: हमरा मदद चाही! हमर स्थान:"
     }
   },
   bho: {
@@ -260,7 +352,8 @@ export const translations = {
       quickActions: "जल्दी काम",
       allEmergencies: "सब आपातकाल",
       checkSymptoms: "लक्षण जाँचीं",
-      critical: "गंभीर"
+      critical: "गंभीर",
+      sosSubtitle: "संपर्क के लोकेशन भेजीं"
     },
     emergencies: {
       title: "सब आपातकाल",
@@ -300,6 +393,28 @@ export const translations = {
       recommended: "सुझावल कार्रवाई",
       viewGuide: "आपातकालीन गाइड देखीं",
       selectAtLeastOne: "कम से कम एगो लक्षण चुनीं"
+    },
+    sos: {
+      title: "आपातकाल (SOS)",
+      subtitle: "रउआ आपातकालीन संपर्क के आपन लाइव लोकेशन भेजे खातिर लाल बटन दबा के रखीं।",
+      holdToSend: "SOS भेजे खातिर बटन दबा के रखीं",
+      locationLoading: "रउआ लोकेशन मिल रहल बा...",
+      locationReady: "लोकेशन तइयार बा",
+      locationError: "लोकेशन नइ मिल पाइल। SMS बिना निर्देशांक भेजल जाई।",
+      locationIdle: "SOS चालू होखे पर लोकेशन साझा होई",
+      locationUnavailable: "(लोकेशन उपलब्ध ना)",
+      smsNotAvailable: "एह डिवाइस पर SMS उपलब्ध ना। ई संदेश आपन हाथ से साझा करीं:",
+      smsFailed: "SMS भेजे में फेल भइल। फेर कोशिश करीं।",
+      noRecipients: "SOS भेजे से पहिले कम से कम एगो आपातकालीन संपर्क जोड़ीं।",
+      noContacts: "अभी कौनो आपातकालीन संपर्क नइखे। नीचे एगो जोड़ीं।",
+      contactsTitle: "आपातकालीन संपर्क",
+      addContact: "आपातकालीन संपर्क जोड़ीं",
+      namePlaceholder: "जइसे: माई",
+      numberPlaceholder: "10 अंक के नंबर",
+      invalidNumber: "10 अंक के सही फोन नंबर दर्ज करीं।",
+      invalidName: "संपर्क के नाम दर्ज करीं।",
+      offlineNote: "SOS बिना इंटरनेट के काम करेला — SMS आ GPS सेल्युलर नेटवर्क इस्तेमाल करेला।",
+      smsBody: "🚨 हेल्पमेट से SOS: हमरा मदद चाहीं! हमार लोकेशन:"
     }
   },
   bn: {
@@ -320,7 +435,8 @@ export const translations = {
       quickActions: "দ্রুত কাজ",
       allEmergencies: "সব জরুরি অবস্থা",
       checkSymptoms: "লক্ষণ পরীক্ষা করুন",
-      critical: "গুরুতর"
+      critical: "গুরুতর",
+      sosSubtitle: "যোগাযোগদের অবস্থান পাঠান"
     },
     emergencies: {
       title: "সব জরুরি অবস্থা",
@@ -360,6 +476,28 @@ export const translations = {
       recommended: "প্রস্তাবিত পদক্ষেপ",
       viewGuide: "জরুরি গাইড দেখুন",
       selectAtLeastOne: "অনুগ্রহ করে কমপক্ষে একটি লক্ষণ নির্বাচন করুন"
+    },
+    sos: {
+      title: "জরুরি (SOS)",
+      subtitle: "আপনার জরুরি যোগাযোগদের আপনার লাইভ অবস্থান পাঠাতে লাল বোতামটি চেপে ধরে রাখুন।",
+      holdToSend: "SOS পাঠাতে বোতামটি চেপে ধরে রাখুন",
+      locationLoading: "আপনার অবস্থান পাওয়া যাচ্ছে...",
+      locationReady: "অবস্থান প্রস্তুত",
+      locationError: "অবস্থান পাওয়া যায়নি। এসএমএস স্থানাঙ্ক ছাড়া পাঠানো হবে।",
+      locationIdle: "SOS ট্রিগার হলে অবস্থান শেয়ার করা হবে",
+      locationUnavailable: "(অবস্থান অনুপলব্ধ)",
+      smsNotAvailable: "এই ডিভাইসে এসএমএস উপলব্ধ নয়। এই বার্তাটি নিজে শেয়ার করুন:",
+      smsFailed: "এসএমএস পাঠানো ব্যর্থ হয়েছে। আবার চেষ্টা করুন।",
+      noRecipients: "SOS পাঠানোর আগে অন্তত একটি জরুরি যোগাযোগ যোগ করুন।",
+      noContacts: "এখনও কোনো জরুরি যোগাযোগ নেই। নিচে একটি যোগ করুন।",
+      contactsTitle: "জরুরি যোগাযোগ",
+      addContact: "জরুরি যোগাযোগ যোগ করুন",
+      namePlaceholder: "যেমন: মা",
+      numberPlaceholder: "10-অঙ্কের নম্বর",
+      invalidNumber: "একটি বৈধ 10-অঙ্কের ফোন নম্বর দিন।",
+      invalidName: "যোগাযোগের নাম দিন।",
+      offlineNote: "SOS ইন্টারনেট ছাড়া কাজ করে — এসএমএস ও জিপিএস সেলুলার নেটওয়ার্ক ব্যবহার করে।",
+      smsBody: "🚨 হেল্পমেট থেকে SOS: আমার সাহায্য দরকার! আমার অবস্থান:"
     }
   }
 };

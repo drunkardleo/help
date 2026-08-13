@@ -19,6 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="cpr-selection" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="emergency-guide" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="symptom-checker" options={{ animation: 'slide_from_right' }} />
+        <Stack.Screen name="sos" options={{ animation: 'slide_from_right' }} />
       </Stack>
     </LanguageProvider>
   );

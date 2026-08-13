@@ -71,7 +71,7 @@ const HomeScreen = () => {
           <View style={styles.iconCircle}>
             <MaterialCommunityIcons name="heart-pulse" size={44} color="#334155" />
           </View>
-          <Text style={styles.appTitle}>HelpMate</Text>
+          <Text style={styles.appTitle}>प्रथम सहाय</Text>
           <Text style={styles.appSubtitle}>First Aid for Everyone</Text>
         </View>
 
@@ -133,6 +133,13 @@ const HomeScreen = () => {
         </View>
       </ScrollView>
       </PageTransition>
+
+      <AnimatedCard style={styles.floatingSosWrap} onPress={() => router.push('/sos')}>
+        <View style={styles.floatingSosButton}>
+          <Ionicons name="nuclear" size={24} color="#FFFFFF" />
+          <Text style={styles.floatingSosText}>SOS</Text>
+        </View>
+      </AnimatedCard>
     </SafeAreaView>
   );
 };
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 24,
     paddingTop: 16,
-    paddingBottom: 40,
+    paddingBottom: 120,
   },
   header: {
     flexDirection: 'row',
@@ -267,6 +274,33 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#1E293B',
     textAlign: 'center',
+  },
+  floatingSosWrap: {
+    position: 'absolute',
+    right: 20,
+    bottom: 24,
+    shadowColor: '#E02C03',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 14,
+    elevation: 10,
+  },
+  floatingSosButton: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: '#B91C1C',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 3,
+    borderColor: '#E02C03',
+    gap: 1,
+  },
+  floatingSosText: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '900',
+    letterSpacing: 1,
   },
   criticalHeader: {
     flexDirection: 'row',
