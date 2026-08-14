@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, StatusBar, Animated } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, StatusBar, Animated } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../contexts/LanguageContext';
 import { LanguageCode } from '../data/translations';
 import { router } from 'expo-router';
@@ -170,7 +171,7 @@ const LanguageSelectionScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <PageTransition>
       
@@ -343,12 +344,12 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 16,
+    justifyContent: 'space-between',
+    rowGap: 16,
     width: '100%',
   },
   cardWrapper: {
-    width: '47.5%',
+    width: '48%',
     borderRadius: 16,
     backgroundColor: '#FFFFFF',
     overflow: 'hidden',

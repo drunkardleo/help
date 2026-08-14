@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Linking, Image, StatusBar, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, Image, StatusBar, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -105,7 +106,7 @@ const EmergencyGuideScreen = () => {
 
   if (!emergency || steps.length === 0) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
         <View style={styles.header}>
           <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
@@ -129,7 +130,7 @@ const EmergencyGuideScreen = () => {
   const stepImage = hasImage ? emergencyImages[currentStepData.image] : null;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
         <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
