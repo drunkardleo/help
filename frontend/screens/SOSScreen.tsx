@@ -79,18 +79,38 @@ const SOSScreen = () => {
 
   const getLocation = async (): Promise<{ latitude: number; longitude: number } | null> => {
     try {
+      const isServiceEnabled = await Location.hasServicesEnabledAsync();
+      if (!isServiceEnabled) {
+        setLocationStatus('error');
+        return null;
+      }
+
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setLocationStatus('error');
         return null;
       }
-      const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-      const coords = { latitude: loc.coords.latitude, longitude: loc.coords.longitude };
-      setLastCoords(coords);
-      setLocationStatus('ready');
-      return coords;
+
+      // Try fresh position first, fallback to last known position
+      let loc = await Location.getCurrentPositionAsync({ 
+        accuracy: Location.Accuracy.Balanced 
+      }).catch(() => null);
+
+      if (!loc) {
+        loc = await Location.getLastKnownPositionAsync();
+      }
+
+      if (loc) {
+        const coords = { latitude: loc.coords.latitude, longitude: loc.coords.longitude };
+        setLastCoords(coords);
+        setLocationStatus('ready');
+        return coords;
+      }
+
+      setLocationStatus('error');
+      return null;
     } catch (e) {
-      console.error('Location error:', e);
+      console.warn('Location retrieval warning:', e);
       setLocationStatus('error');
       return null;
     }
