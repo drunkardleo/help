@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking, StatusBar, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking, StatusBar, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -60,7 +60,7 @@ const HomeScreen = () => {
         
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>HelpMate</Text>
+          <Text style={styles.headerTitle}>प्रथम सहाय</Text>
           <AnimatedCard onPress={handleLanguageSwitch} style={styles.languageButton}>
             <Ionicons name="globe-outline" size={18} color="#334155" />
             <Text style={styles.languageText}>{language.toUpperCase()}</Text>
@@ -69,9 +69,11 @@ const HomeScreen = () => {
 
         {/* Hero Section */}
         <View style={styles.heroSection}>
-          <View style={styles.iconCircle}>
-            <MaterialCommunityIcons name="heart-pulse" size={44} color="#334155" />
-          </View>
+          <Image 
+            source={require('../assets/images/logo.png')} 
+            style={styles.heroLogo} 
+            resizeMode="contain" 
+          />
           <Text style={styles.appTitle}>प्रथम सहाय</Text>
           <Text style={styles.appSubtitle}>First Aid for Everyone</Text>
         </View>
@@ -183,23 +185,19 @@ const styles = StyleSheet.create({
   },
   heroSection: {
     alignItems: 'center',
-    marginBottom: 28,
+    marginBottom: 24,
   },
-  iconCircle: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-    backgroundColor: '#F1F5F9',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
+  heroLogo: {
+    width: 140,
+    height: 140,
+    marginBottom: 4,
   },
   appTitle: {
     fontSize: 30,
     fontWeight: '800',
     color: '#0F172A',
     letterSpacing: -0.5,
-    marginBottom: 6,
+    marginBottom: 4,
   },
   appSubtitle: {
     fontSize: 15,

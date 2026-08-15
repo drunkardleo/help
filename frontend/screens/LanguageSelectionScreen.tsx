@@ -180,7 +180,7 @@ const LanguageSelectionScreen = () => {
           <Ionicons name="arrow-back" size={22} color="#0F172A" />
         </AnimatedCard>
 
-        <Text style={styles.headerTitle}>Language / भाषा</Text>
+        <Text style={styles.headerTitle}>भाषाओं</Text>
 
         <AnimatedCard 
           onPress={startAudioSequence} 
@@ -287,10 +287,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: '800',
     color: '#0F172A',
-    letterSpacing: -0.3,
+    letterSpacing: -0.4,
   },
   audioButton: {
     width: 40,
