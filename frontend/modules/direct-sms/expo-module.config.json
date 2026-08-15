@@ -1,0 +1,7 @@
+{
+  "name": "direct-sms",
+  "platforms": ["android"],
+  "android": {
+    "modules": ["expo.modules.directsms.DirectSmsModule"]
+  }
+}

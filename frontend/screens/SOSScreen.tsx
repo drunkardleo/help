@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, StatusBar,
-  Pressable, TextInput, Alert, Platform, Animated
+  Pressable, TextInput, Alert, Platform, Animated,
+  PermissionsAndroid, NativeModules
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -11,6 +12,7 @@ import * as SMS from 'expo-sms';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router } from 'expo-router';
 import { AnimatedCard } from '../components/AnimatedCard';
+import DirectSms from '../modules/direct-sms';
 
 interface Contact {
   id: string;
@@ -19,7 +21,7 @@ interface Contact {
 }
 
 const CONTACTS_KEY = '@helpmate_sos_contacts';
-const HOLD_DURATION = 1500;
+const HOLD_DURATION = 3000;
 
 const SOSScreen = () => {
   const { t } = useLanguage();
@@ -91,7 +93,6 @@ const SOSScreen = () => {
         return null;
       }
 
-      // Try fresh position first, fallback to last known position
       let loc = await Location.getCurrentPositionAsync({ 
         accuracy: Location.Accuracy.Balanced 
       }).catch(() => null);
@@ -136,6 +137,30 @@ const SOSScreen = () => {
     }
 
     try {
+      if (Platform.OS === 'android' && DirectSms) {
+        let hasPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.SEND_SMS);
+        if (!hasPermission) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.SEND_SMS,
+            {
+              title: "SMS Permission",
+              message: "HelpMate needs permission to send emergency SOS messages directly to your contacts.",
+              buttonPositive: "Allow"
+            }
+          );
+          hasPermission = granted === PermissionsAndroid.RESULTS.GRANTED;
+        }
+
+        if (hasPermission) {
+          await DirectSms.sendDirectSms(numbers, message);
+          Alert.alert(
+            "🚨 SOS Sent",
+            "Emergency messages with your live location have been sent directly to your emergency contacts."
+          );
+          return;
+        }
+      }
+
       const isAvailable = await SMS.isAvailableAsync();
       if (Platform.OS === 'web' || !isAvailable) {
         Alert.alert(t.sos.title, t.sos.smsNotAvailable + (coords ? `\n\n${message}` : ''));
