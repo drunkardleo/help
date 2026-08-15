@@ -54,7 +54,7 @@ export default function Index() {
         </Animated.View>
 
         <Animated.View style={[styles.textWrapper, { opacity: contentOpacity }]}>
-          <Text style={styles.appTitle}>HelpMate</Text>
+          <Text style={styles.appTitle}>प्रथम सहाय</Text>
           <Text style={styles.appSubtitle}>First Aid & Emergency Guide</Text>
         </Animated.View>
       </View>
@@ -82,9 +82,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logo: {
+    width: 160,
+    height: 160,
+  },
   textWrapper: {
     alignItems: 'center',
-    marginTop: 28,
+    marginTop: 20,
   },
   appTitle: {
     fontSize: 34,
