@@ -13,8 +13,6 @@ const AllEmergenciesScreen = () => {
   const emergencyIcons: Record<string, { name: string; set: string; color: string; bg: string }> = {
     bleeding: { name: 'tint', set: 'FontAwesome5', color: '#DC2626', bg: '#FEE2E2' },
     burns: { name: 'fire', set: 'FontAwesome5', color: '#EA580C', bg: '#FFEDD5' },
-    choking: { name: 'wind', set: 'FontAwesome5', color: '#0284C7', bg: '#E0F2FE' },
-    fracture: { name: 'bone', set: 'FontAwesome5', color: '#7C3AED', bg: '#F3E8FF' },
     shock: { name: 'bolt', set: 'FontAwesome5', color: '#D97706', bg: '#FEF3C7' },
     heart_attack: { name: 'heart', set: 'FontAwesome5', color: '#E11D48', bg: '#FFE4E6' },
     cpr: { name: 'heart-pulse', set: 'MaterialCommunityIcons', color: '#0D9488', bg: '#CCFBF1' },

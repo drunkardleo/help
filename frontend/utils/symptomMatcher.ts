@@ -16,10 +16,6 @@ export const matchSymptomsToEmergency = (symptoms: string[]): SymptomMatch | nul
       symptoms: ['heavyBleeding', 'vomitingBlood'],
       id: 'bleeding'
     },
-    choking: {
-      symptoms: ['breathingDifficulty'],
-      id: 'choking'
-    },
     shock: {
       symptoms: ['unconscious', 'weakPulse', 'coldSweating'],
       id: 'shock'
@@ -27,10 +23,6 @@ export const matchSymptomsToEmergency = (symptoms: string[]): SymptomMatch | nul
     burns: {
       symptoms: ['burnInjury'],
       id: 'burns'
-    },
-    fracture: {
-      symptoms: ['bonePain'],
-      id: 'fracture'
     }
   };
 
