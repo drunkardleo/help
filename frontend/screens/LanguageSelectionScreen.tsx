@@ -179,7 +179,7 @@ const LanguageSelectionScreen = () => {
           <Ionicons name="arrow-back" size={22} color="#0F172A" />
         </AnimatedCard>
 
-        <Text style={styles.headerTitle}>भाषा</Text>
+        <Text style={styles.headerTitle}>भाषाएँ</Text>
 
         <View style={styles.headerSpacer} />
       </View>
