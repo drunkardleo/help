@@ -53,7 +53,6 @@ const LanguageSelectionScreen = () => {
   useEffect(() => {
     isMountedRef.current = true;
 
-    // 3.5-second calm pause before starting voice audio sequence
     const initialDelayTimer = setTimeout(() => {
       if (isMountedRef.current) {
         startAudioSequence();
@@ -180,18 +179,9 @@ const LanguageSelectionScreen = () => {
           <Ionicons name="arrow-back" size={22} color="#0F172A" />
         </AnimatedCard>
 
-        <Text style={styles.headerTitle}>भाषाओं</Text>
+        <Text style={styles.headerTitle}>भाषा</Text>
 
-        <AnimatedCard 
-          onPress={startAudioSequence} 
-          style={[styles.audioButton, isPlayingSequence && styles.audioButtonActive]}
-        >
-          <Ionicons 
-            name={isPlayingSequence ? "volume-high" : "volume-medium-outline"} 
-            size={18} 
-            color={isPlayingSequence ? "#B45309" : "#334155"} 
-          />
-        </AnimatedCard>
+        <View style={styles.headerSpacer} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -292,24 +282,8 @@ const styles = StyleSheet.create({
     color: '#0F172A',
     letterSpacing: -0.4,
   },
-  audioButton: {
+  headerSpacer: {
     width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F8FAFC',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-  },
-  audioButtonActive: {
-    backgroundColor: '#FFFBEB',
-    borderColor: '#F59E0B',
-    shadowColor: '#F59E0B',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 3,
   },
   scrollContent: {
     paddingHorizontal: 24,
@@ -321,10 +295,17 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 45,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: '#F8FAFC',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 2,
   },
   title: {
     fontSize: 26,
@@ -350,14 +331,14 @@ const styles = StyleSheet.create({
   },
   cardWrapper: {
     width: '48%',
-    borderRadius: 16,
+    borderRadius: 18,
     backgroundColor: '#FFFFFF',
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.03,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
   },
   languageButtonInner: {
     width: '100%',
@@ -398,8 +379,9 @@ const styles = StyleSheet.create({
   },
   nativeText: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '800',
     color: '#0F172A',
+    letterSpacing: -0.3,
   },
   englishText: {
     fontSize: 13,

@@ -10,14 +10,15 @@ import emergenciesData from '../data/emergencies.json';
 const AllEmergenciesScreen = () => {
   const { t, language } = useLanguage();
 
-  const emergencyIcons: Record<string, { name: string; set: string }> = {
-    bleeding: { name: 'tint', set: 'FontAwesome5' },
-    burns: { name: 'fire', set: 'FontAwesome5' },
-    choking: { name: 'wind', set: 'FontAwesome5' },
-    fracture: { name: 'bone', set: 'FontAwesome5' },
-    shock: { name: 'bolt', set: 'FontAwesome5' },
-    heart_attack: { name: 'heart', set: 'FontAwesome5' },
-    cpr: { name: 'heart-pulse', set: 'MaterialCommunityIcons' }
+  const emergencyIcons: Record<string, { name: string; set: string; color: string; bg: string }> = {
+    bleeding: { name: 'tint', set: 'FontAwesome5', color: '#DC2626', bg: '#FEE2E2' },
+    burns: { name: 'fire', set: 'FontAwesome5', color: '#EA580C', bg: '#FFEDD5' },
+    choking: { name: 'wind', set: 'FontAwesome5', color: '#0284C7', bg: '#E0F2FE' },
+    fracture: { name: 'bone', set: 'FontAwesome5', color: '#7C3AED', bg: '#F3E8FF' },
+    shock: { name: 'bolt', set: 'FontAwesome5', color: '#D97706', bg: '#FEF3C7' },
+    heart_attack: { name: 'heart', set: 'FontAwesome5', color: '#E11D48', bg: '#FFE4E6' },
+    cpr: { name: 'heart-pulse', set: 'MaterialCommunityIcons', color: '#0D9488', bg: '#CCFBF1' },
+    snake_bite: { name: 'snake', set: 'MaterialCommunityIcons', color: '#16A34A', bg: '#DCFCE7' }
   };
 
   const handleEmergencyPress = (id: string) => {
@@ -51,22 +52,22 @@ const AllEmergenciesScreen = () => {
         
         <View style={styles.emergenciesGrid}>
           {emergenciesData.emergencies.map((emergency: any) => {
-            const config = emergencyIcons[emergency.id] || { name: 'alert-circle', set: 'Ionicons' };
+            const config = emergencyIcons[emergency.id] || { name: 'alert-circle', set: 'Ionicons', color: '#DC2626', bg: '#FEE2E2' };
             return (
               <AnimatedCard
                 key={emergency.id}
                 style={styles.emergencyCard}
                 onPress={() => handleEmergencyPress(emergency.id)}
               >
-                <View style={styles.iconContainer}>
+                <View style={[styles.iconContainer, { backgroundColor: config.bg }]}>
                   {config.set === 'FontAwesome5' && (
-                    <FontAwesome5 name={config.name} size={24} color="#334155" />
+                    <FontAwesome5 name={config.name} size={24} color={config.color} />
                   )}
                   {config.set === 'MaterialCommunityIcons' && (
-                    <MaterialCommunityIcons name={config.name as any} size={26} color="#334155" />
+                    <MaterialCommunityIcons name={config.name as any} size={28} color={config.color} />
                   )}
                   {config.set === 'Ionicons' && (
-                    <Ionicons name={config.name as any} size={26} color="#334155" />
+                    <Ionicons name={config.name as any} size={28} color={config.color} />
                   )}
                 </View>
                 <Text style={styles.emergencyTitle}>{getEmergencyTitle(emergency)}</Text>
@@ -128,32 +129,37 @@ const styles = StyleSheet.create({
   emergencyCard: {
     width: '48%',
     backgroundColor: '#FFFFFF',
-    paddingVertical: 22,
-    paddingHorizontal: 14,
-    borderRadius: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 12,
+    borderRadius: 18,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: '#F1F5F9',
     gap: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.03,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
   },
   iconContainer: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: '#F8FAFC',
+    width: 54,
+    height: 54,
+    borderRadius: 27,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 1,
   },
   emergencyTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1E293B',
+    fontSize: 14.5,
+    fontWeight: '800',
+    color: '#0F172A',
     textAlign: 'center',
+    letterSpacing: -0.2,
   },
 });
 

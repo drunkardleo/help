@@ -20,6 +20,8 @@ export const translations = {
       quickActions: "Quick Actions",
       allEmergencies: "All Emergencies",
       checkSymptoms: "Check Symptoms",
+      snakePoisoning: "Snake Poisoning",
+      dummyAction: "More",
       critical: "Critical",
       sosSubtitle: "Send location to contacts"
     },
@@ -103,6 +105,8 @@ export const translations = {
       quickActions: "त्वरित कार्य",
       allEmergencies: "सभी आपातकाल",
       checkSymptoms: "लक्षण जांचें",
+      snakePoisoning: "साँप का जहर",
+      dummyAction: "अन्य",
       critical: "गंभीर",
       sosSubtitle: "संपर्कों को स्थान भेजें"
     },
@@ -183,11 +187,13 @@ export const translations = {
       subtitle: "सर्वांसाठी प्राथमिक उपचार",
       callEmergency: "आपत्कालीन कॉल करा (112)",
       disclaimer: "हे अॅप केवळ प्राथमिक उपचार मार्गदर्शन प्रदान करते. आवश्यक असल्यास वैद्यकीय मदत घ्या.",
-      quickActions: "जलद क्रिया",
-      allEmergencies: "सर्व आपत्काल",
+      quickActions: "जलद कृती",
+      allEmergencies: "सर्व आपत्कालीन",
       checkSymptoms: "लक्षणे तपासा",
+      snakePoisoning: "सापाचे विष",
+      dummyAction: "अधिक",
       critical: "गंभीर",
-      sosSubtitle: "संपर्कांना ठिकाण पाठवा"
+      sosSubtitle: "संपर्कांना स्थान पाठवा"
     },
     emergencies: {
       title: "सर्व आपत्काल",
@@ -266,11 +272,13 @@ export const translations = {
       subtitle: "सभक लेल प्राथमिक चिकित्सा",
       callEmergency: "आपातकाल कॉल करू (112)",
       disclaimer: "ई ऐप केवल प्राथमिक चिकित्सा मार्गदर्शन प्रदान करैत अछि। आवश्यकता पड़ला पर चिकित्सा सहायता लिअ।",
-      quickActions: "तुरंत कार्य",
-      allEmergencies: "सभ आपातकाल",
+      quickActions: "त्वरित कार्य",
+      allEmergencies: "सब आपातकाल",
       checkSymptoms: "लक्षण जाँचू",
+      snakePoisoning: "सांपक विष",
+      dummyAction: "आन",
       critical: "गंभीर",
-      sosSubtitle: "संपर्क सभके स्थान पठाऊ"
+      sosSubtitle: "संपर्क के स्थान पठाउ"
     },
     emergencies: {
       title: "सभ आपातकाल",
@@ -349,11 +357,13 @@ export const translations = {
       subtitle: "सबके खातिर प्राथमिक इलाज",
       callEmergency: "आपातकाल कॉल करीं (112)",
       disclaimer: "ई ऐप केवल प्राथमिक चिकित्सा मार्गदर्शन देला। जरूरत परे पर चिकित्सा मदद लीं।",
-      quickActions: "जल्दी काम",
-      allEmergencies: "सब आपातकाल",
+      quickActions: "तुरंत कार्रवाई",
+      allEmergencies: "सभ आपातकाल",
       checkSymptoms: "लक्षण जाँचीं",
+      snakePoisoning: "सांप के जहर",
+      dummyAction: "अउर",
       critical: "गंभीर",
-      sosSubtitle: "संपर्क के लोकेशन भेजीं"
+      sosSubtitle: "संपर्कन के लोकेशन भेजीं"
     },
     emergencies: {
       title: "सब आपातकाल",
@@ -432,11 +442,13 @@ export const translations = {
       subtitle: "সবার জন্য প্রাথমিক চিকিৎসা",
       callEmergency: "জরুরি কল করুন (112)",
       disclaimer: "এই অ্যাপটি শুধুমাত্র প্রাথমিক চিকিৎসা নির্দেশনা প্রদান করে। প্রয়োজনে চিকিৎসা সহায়তা নিন।",
-      quickActions: "দ্রুত কাজ",
-      allEmergencies: "সব জরুরি অবস্থা",
+      quickActions: "দ্রুত পদক্ষেপ",
+      allEmergencies: "সমস্ত জরুরি অবস্থা",
       checkSymptoms: "লক্ষণ পরীক্ষা করুন",
-      critical: "গুরুতর",
-      sosSubtitle: "যোগাযোগদের অবস্থান পাঠান"
+      snakePoisoning: "সাপের বিষ",
+      dummyAction: "অন্যান্য",
+      critical: "সংকটজনক",
+      sosSubtitle: "পরিচিতদের অবস্থান পাঠান"
     },
     emergencies: {
       title: "সব জরুরি অবস্থা",
