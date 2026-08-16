@@ -1,24 +1,25 @@
-# HelpMate
+# HelpMate (Pratham Sahay)
 
-Multi-lingual first-aid and emergency guidance application built with React Native (Expo) frontend and FastAPI backend with MongoDB.
+Multilingual first-aid and emergency guidance application built with React Native (Expo) frontend and FastAPI backend with MongoDB.
 
 ## Prerequisites
 
 - Node.js (v18+)
 - Python (3.10+)
 - MongoDB (running on `localhost:27017`)
+- Android SDK & JDK 17+ (required for local Android builds)
 
 ## Project Structure
 
 ```
 HelpMate/
-├── backend/       # FastAPI server and MongoDB connection
-└── frontend/      # Expo React Native web and mobile app
+|-- backend/       # FastAPI server and MongoDB connection
+`-- frontend/      # Expo React Native mobile and web application
 ```
 
 ## Backend Setup
 
-1. Navigate to backend directory:
+1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
@@ -31,7 +32,7 @@ HelpMate/
 
 3. Install dependencies:
    ```bash
-   pip install fastapi uvicorn motor python-dotenv pydantic
+   pip install -r requirements.txt
    ```
 
 4. Create environment configuration (`backend/.env`):
@@ -50,7 +51,7 @@ HelpMate/
 
 ## Frontend Setup
 
-1. Navigate to frontend directory:
+1. Navigate to the frontend directory:
    ```bash
    cd frontend
    ```
@@ -61,16 +62,89 @@ HelpMate/
    ```
 
 3. Start the application:
+   - Development Server / Mobile Metro:
+     ```bash
+     npm run start
+     ```
+   - Android Emulator / Connected Device:
+     ```bash
+     npm run android
+     ```
+   - iOS Simulator (macOS only):
+     ```bash
+     npm run ios
+     ```
    - Web:
      ```bash
-     npx expo start --web
-     ```
-   - Mobile:
-     ```bash
-     npx expo start
+     npm run web
      ```
 
-   The web app will run at `http://localhost:8081`.
+## Building & Installing the Android APK
+
+All build commands should be executed from within the `frontend/` directory.
+
+### 1. Local APK Build (via Gradle)
+
+Build directly on your local machine using Android SDK:
+
+- **Universal APK (Local)**:
+  ```bash
+  npm run build:local
+  ```
+  *Alternative direct command:*
+  ```bash
+  cd android && ./gradlew assembleRelease
+  ```
+  Output APK location: `frontend/android/app/build/outputs/apk/release/app-release.apk`
+
+- **Optimized ARM64 APK (Smaller file size)**:
+  ```bash
+  npm run build:local:arm64
+  ```
+  *Alternative direct command:*
+  ```bash
+  cd android && ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a
+  ```
+
+### 2. Cloud APK Build (via EAS Build)
+
+Build standalone APKs in the cloud using Expo Application Services:
+
+- **Standard Preview APK**:
+  ```bash
+  npm run build:apk
+  ```
+  *Direct command:*
+  ```bash
+  npx eas-cli build --platform android --profile preview
+  ```
+
+- **ARM64 Optimized Preview APK**:
+  ```bash
+  npm run build:apk:arm64
+  ```
+  *Direct command:*
+  ```bash
+  npx eas-cli build --platform android --profile preview-arm64
+  ```
+
+- **Production App Bundle (AAB for Google Play)**:
+  ```bash
+  npm run build:aab
+  ```
+
+### 3. Installing the APK on a Connected Android Device
+
+Connect your Android device via USB with USB Debugging enabled, then run:
+
+```bash
+adb install android/app/build/outputs/apk/release/app-release.apk
+```
+
+Or for updating an existing installation:
+```bash
+adb install -r android/app/build/outputs/apk/release/app-release.apk
+```
 
 ## API Endpoints
 
@@ -82,4 +156,5 @@ HelpMate/
 
 ## Supported Languages
 
-English, German, French, Spanish, Italian.
+English, Hindi, Marathi, Maithili, Bhojpuri, and Bengali.
+
