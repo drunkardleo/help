@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AnimatedCard } from '../components/AnimatedCard';
+import { CPRBeatCircle } from '../components/CPRBeatCircle';
 import emergenciesData from '../data/emergencies.json';
 
 interface Emergency {
@@ -149,7 +150,9 @@ const EmergencyGuideScreen = () => {
           <View style={[styles.progressBar, { width: `${progress}%` }]} />
         </View>
 
-        {stepImage ? (
+        {emergencyId === 'cpr' && currentStep === 4 ? (
+          <CPRBeatCircle />
+        ) : stepImage ? (
           <Image 
             source={stepImage} 
             style={styles.stepImage}
