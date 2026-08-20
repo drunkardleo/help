@@ -1,35 +1,65 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, StatusBar } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  StatusBar,
+  Linking,
+  TouchableOpacity
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router } from 'expo-router';
-import { matchSymptomsToEmergency } from '../utils/symptomMatcher';
+import { checkSymptoms } from '../utils/symptomMatcher';
+import {
+  SymptomCheckResult,
+  SymptomId,
+  TriageSeverity
+} from '../types/symptomChecker.types';
 import { AnimatedCard } from '../components/AnimatedCard';
 import emergenciesData from '../data/emergencies.json';
 
+interface SymptomOption {
+  id: SymptomId;
+  label: string;
+  icon: string;
+}
+
 const SymptomCheckerScreen = () => {
   const { t, language } = useLanguage();
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
-  const [result, setResult] = useState<{ emergencyId: string; title: string } | null>(null);
+  const [selectedSymptoms, setSelectedSymptoms] = useState<SymptomId[]>([]);
+  const [triageResult, setTriageResult] = useState<SymptomCheckResult | null>(
+    null
+  );
 
-  const symptoms = [
-    { id: 'chestPain', label: t.symptoms.chestPain, icon: 'heart', iconSet: 'FontAwesome5' },
-    { id: 'heavyBleeding', label: t.symptoms.heavyBleeding, icon: 'tint', iconSet: 'FontAwesome5' },
-    { id: 'breathingDifficulty', label: t.symptoms.breathingDifficulty, icon: 'wind', iconSet: 'FontAwesome5' },
-    { id: 'unconscious', label: t.symptoms.unconscious, icon: 'user-alt-slash', iconSet: 'FontAwesome5' },
-    { id: 'burnInjury', label: t.symptoms.burnInjury, icon: 'fire', iconSet: 'FontAwesome5' },
-    { id: 'bonePain', label: t.symptoms.bonePain, icon: 'bone', iconSet: 'FontAwesome5' },
-    { id: 'weakPulse', label: t.symptoms.weakPulse, icon: 'wave-square', iconSet: 'FontAwesome5' },
-    { id: 'dizziness', label: t.symptoms.dizziness, icon: 'sync-alt', iconSet: 'FontAwesome5' },
-    { id: 'vomitingBlood', label: t.symptoms.vomitingBlood, icon: 'exclamation-triangle', iconSet: 'FontAwesome5' },
-    { id: 'suddenWeakness', label: t.symptoms.suddenWeakness, icon: 'battery-quarter', iconSet: 'FontAwesome5' },
-    { id: 'coldSweating', label: t.symptoms.coldSweating, icon: 'temperature-low', iconSet: 'FontAwesome5' }
+  const symptoms: SymptomOption[] = [
+    { id: 'chestPain', label: t.symptoms.chestPain, icon: 'heart' },
+    { id: 'radiatingPain', label: t.symptoms.radiatingPain, icon: 'bolt' },
+    { id: 'breathingDifficulty', label: t.symptoms.breathingDifficulty, icon: 'wind' },
+    { id: 'notBreathing', label: t.symptoms.notBreathing, icon: 'lungs-virus' },
+    { id: 'noPulse', label: t.symptoms.noPulse, icon: 'heartbeat' },
+    { id: 'heavyBleeding', label: t.symptoms.heavyBleeding, icon: 'tint' },
+    { id: 'vomitingBlood', label: t.symptoms.vomitingBlood, icon: 'exclamation-triangle' },
+    { id: 'unconscious', label: t.symptoms.unconscious, icon: 'user-alt-slash' },
+    { id: 'burnInjury', label: t.symptoms.burnInjury, icon: 'fire' },
+    { id: 'extensiveBurn', label: t.symptoms.extensiveBurn, icon: 'fire-alt' },
+    { id: 'snakeBiteMarks', label: t.symptoms.snakeBiteMarks, icon: 'skull-crossbones' },
+    { id: 'swellingAtBiteSite', label: t.symptoms.swellingAtBiteSite, icon: 'band-aid' },
+    { id: 'numbnessOrTingling', label: t.symptoms.numbnessOrTingling, icon: 'feather-alt' },
+    { id: 'weakPulse', label: t.symptoms.weakPulse, icon: 'wave-square' },
+    { id: 'suddenWeakness', label: t.symptoms.suddenWeakness, icon: 'battery-quarter' },
+    { id: 'coldSweating', label: t.symptoms.coldSweating, icon: 'temperature-low' },
+    { id: 'dizziness', label: t.symptoms.dizziness, icon: 'sync-alt' },
+    { id: 'nauseaVomiting', label: t.symptoms.nauseaVomiting, icon: 'dizzy' },
+    { id: 'bonePain', label: t.symptoms.bonePain, icon: 'bone' }
   ];
 
-  const toggleSymptom = (symptomId: string) => {
+  const toggleSymptom = (symptomId: SymptomId) => {
     if (selectedSymptoms.includes(symptomId)) {
-      setSelectedSymptoms(selectedSymptoms.filter(s => s !== symptomId));
+      setSelectedSymptoms(selectedSymptoms.filter((s) => s !== symptomId));
     } else {
       setSelectedSymptoms([...selectedSymptoms, symptomId]);
     }
@@ -41,31 +71,76 @@ const SymptomCheckerScreen = () => {
       return;
     }
 
-    const match = matchSymptomsToEmergency(selectedSymptoms);
-    if (match) {
-      const emergency = emergenciesData.emergencies.find((e: any) => e.id === match.emergencyId);
-      if (emergency) {
-        const translatedTitle = typeof emergency.title === 'object' 
-          ? (emergency.title[language] || emergency.title.en)
-          : emergency.title;
-        
-        setResult({
-          emergencyId: match.emergencyId,
-          title: translatedTitle
-        });
-      }
+    const result = checkSymptoms(selectedSymptoms);
+    setTriageResult(result);
+  };
+
+  const handleCallEmergency = (phone = '108') => {
+    const phoneUrl = `tel:${phone}`;
+    Linking.canOpenURL(phoneUrl)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(phoneUrl);
+        } else {
+          Alert.alert(
+            `Emergency Call (${phone})`,
+            `Calling ${phone} is not supported on this device/simulator. Please dial ${phone} directly on your phone.`
+          );
+        }
+      })
+      .catch(() => {
+        Alert.alert(
+          `Emergency Call (${phone})`,
+          `Please dial ${phone} immediately on your phone.`
+        );
+      });
+  };
+
+  const getEmergencyTitle = (emergencyId: string) => {
+    const emergency = emergenciesData.emergencies.find(
+      (e: any) => e.id === emergencyId
+    );
+    if (!emergency) return emergencyId;
+    if (typeof emergency.title === 'object') {
+      return (
+        (emergency.title as Record<string, string>)[language] ||
+        (emergency.title as Record<string, string>).en
+      );
+    }
+    return emergency.title;
+  };
+
+  const getSeverityBadgeStyle = (severity: TriageSeverity) => {
+    switch (severity) {
+      case TriageSeverity.CRITICAL:
+        return {
+          container: styles.badgeCritical,
+          text: styles.badgeCriticalText,
+          label: t.symptoms.severityCritical
+        };
+      case TriageSeverity.URGENT:
+        return {
+          container: styles.badgeUrgent,
+          text: styles.badgeUrgentText,
+          label: t.symptoms.severityUrgent
+        };
+      case TriageSeverity.FIRST_AID:
+      default:
+        return {
+          container: styles.badgeFirstAid,
+          text: styles.badgeFirstAidText,
+          label: t.symptoms.severityFirstAid
+        };
     }
   };
 
-  const handleViewGuide = () => {
-    if (result) {
-      router.push(`/emergency-guide?id=${result.emergencyId}`);
-    }
+  const handleViewGuide = (emergencyId: string) => {
+    router.push(`/emergency-guide?id=${emergencyId}`);
   };
 
   const handleReset = () => {
     setSelectedSymptoms([]);
-    setResult(null);
+    setTriageResult(null);
   };
 
   return (
@@ -79,67 +154,265 @@ const SymptomCheckerScreen = () => {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <Text style={styles.subtitle}>{t.symptoms.subtitle}</Text>
-
-        <View style={styles.symptomsContainer}>
-          {symptoms.map((symptom) => {
-            const isSelected = selectedSymptoms.includes(symptom.id);
-            return (
-              <AnimatedCard
-                key={symptom.id}
-                style={[styles.symptomCard, isSelected && styles.symptomCardSelected]}
-                onPress={() => toggleSymptom(symptom.id)}
-              >
-                <View style={styles.symptomContent}>
-                  <View style={[styles.iconContainer, isSelected && styles.iconContainerSelected]}>
-                    <FontAwesome5 
-                      name={symptom.icon} 
-                      size={18} 
-                      color={isSelected ? '#FFFFFF' : '#36D1B6'} 
-                    />
-                  </View>
-                  <Text style={[styles.symptomText, isSelected && styles.symptomTextSelected]}>
-                    {symptom.label}
-                  </Text>
-                </View>
-                <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
-                  {isSelected && <Ionicons name="checkmark" size={16} color="#FFFFFF" />}
-                </View>
-              </AnimatedCard>
-            );
-          })}
-        </View>
-
-        {result && (
-          <View style={styles.resultContainer}>
-            <View style={styles.resultCard}>
-              <View style={styles.resultBadge}>
-                <Ionicons name="checkmark-circle" size={22} color="#36D1B6" />
-                <Text style={styles.resultTitle}>{t.symptoms.result}</Text>
-              </View>
-              <Text style={styles.resultLabel}>{t.symptoms.recommended}</Text>
-              <Text style={styles.resultEmergency}>{result.title}</Text>
-              <AnimatedCard style={styles.viewGuideButton} onPress={handleViewGuide}>
-                <Text style={styles.viewGuideButtonText}>{t.symptoms.viewGuide}</Text>
-                <Ionicons name="arrow-forward" size={18} color="#FFFFFF" />
-              </AnimatedCard>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {}
+        {triageResult && triageResult.isCritical && (
+          <View style={styles.criticalBanner}>
+            <View style={styles.criticalBannerHeader}>
+              <Ionicons name="warning" size={22} color="#DC2626" />
+              <Text style={styles.criticalBannerTitle} numberOfLines={1}>
+                {t.symptoms.criticalAlertTitle}
+              </Text>
             </View>
-            <AnimatedCard style={styles.resetButton} onPress={handleReset}>
-              <Ionicons name="refresh" size={18} color="#64748B" />
-              <Text style={styles.resetButtonText}>Check Again</Text>
-            </AnimatedCard>
+            <Text style={styles.criticalBannerSub}>
+              {t.symptoms.criticalAlertSub}
+            </Text>
+            <View style={styles.criticalButtonRow}>
+              <TouchableOpacity
+                style={styles.call108Button}
+                activeOpacity={0.85}
+                onPress={() => handleCallEmergency('108')}
+              >
+                <Ionicons name="call" size={16} color="#FFFFFF" />
+                <Text style={styles.call108ButtonText} numberOfLines={1}>
+                  {t.symptoms.callAmbulanceBtn}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.call112Button}
+                activeOpacity={0.85}
+                onPress={() => handleCallEmergency('112')}
+              >
+                <Ionicons name="call-outline" size={16} color="#DC2626" />
+                <Text style={styles.call112ButtonText} numberOfLines={1}>
+                  {t.symptoms.callEmergency112}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
 
-        {!result && (
-          <AnimatedCard 
-            style={[styles.checkButton, selectedSymptoms.length === 0 && styles.checkButtonDisabled]} 
-            onPress={handleCheck}
-          >
-            <Text style={styles.checkButtonText}>{t.symptoms.checkButton}</Text>
-            <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
-          </AnimatedCard>
+        {}
+        {triageResult && (
+          <View style={styles.resultContainer}>
+            {}
+            {triageResult.fallback && (
+              <View style={styles.fallbackCard}>
+                <View style={styles.fallbackHeader}>
+                  <Ionicons name="alert-circle" size={26} color="#EA580C" />
+                  <Text style={styles.fallbackTitle}>
+                    {t.symptoms.fallbackTitle}
+                  </Text>
+                </View>
+                <Text style={styles.fallbackDesc}>
+                  {t.symptoms.fallbackDesc}
+                </Text>
+                <View style={styles.fallbackButtonRow}>
+                  <TouchableOpacity
+                    style={styles.call108Button}
+                    activeOpacity={0.85}
+                    onPress={() => handleCallEmergency('108')}
+                  >
+                    <Ionicons name="call" size={16} color="#FFFFFF" />
+                    <Text style={styles.call108ButtonText} numberOfLines={1}>
+                      {t.symptoms.callAmbulanceBtn}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.call112OutlineButton}
+                    activeOpacity={0.85}
+                    onPress={() => handleCallEmergency('112')}
+                  >
+                    <Ionicons name="call-outline" size={16} color="#0F172A" />
+                    <Text style={styles.call112OutlineText} numberOfLines={1}>
+                      {t.symptoms.callEmergency112}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+
+            {}
+            {triageResult.primary && (
+              <View style={styles.resultCard}>
+                <View style={styles.resultHeaderRow}>
+                  <Text style={styles.resultBadgeText}>
+                    {t.symptoms.recommended}
+                  </Text>
+                  {(() => {
+                    const badge = getSeverityBadgeStyle(
+                      triageResult.primary.severity
+                    );
+                    return (
+                      <View style={[styles.badgeBase, badge.container]}>
+                        <Text style={[styles.badgeTextBase, badge.text]}>
+                          {badge.label}
+                        </Text>
+                      </View>
+                    );
+                  })()}
+                </View>
+
+                <Text style={styles.resultEmergencyTitle}>
+                  {getEmergencyTitle(triageResult.primary.emergencyId)}
+                </Text>
+
+                <View style={styles.confidenceRow}>
+                  <Text style={styles.confidenceText}>
+                    Match Confidence: {triageResult.primary.confidence}%
+                  </Text>
+                  {triageResult.primary.hardFlagTriggered && (
+                    <View style={styles.hardFlagTag}>
+                      <Ionicons name="shield-checkmark" size={12} color="#DC2626" />
+                      <Text style={styles.hardFlagTagText}>Red Flag Priority</Text>
+                    </View>
+                  )}
+                </View>
+
+                <AnimatedCard
+                  style={[
+                    styles.viewGuideButton,
+                    triageResult.primary.severity === TriageSeverity.CRITICAL
+                      ? styles.viewGuideButtonCritical
+                      : styles.viewGuideButtonStandard
+                  ]}
+                  onPress={() =>
+                    handleViewGuide(triageResult.primary!.emergencyId)
+                  }
+                >
+                  <Text style={styles.viewGuideButtonText}>
+                    {t.symptoms.viewGuide}
+                  </Text>
+                  <Ionicons name="arrow-forward" size={18} color="#FFFFFF" />
+                </AnimatedCard>
+              </View>
+            )}
+
+            {}
+            {triageResult.secondary && triageResult.secondary.length > 0 && (
+              <View style={styles.secondarySection}>
+                <Text style={styles.secondarySectionTitle}>
+                  {t.symptoms.alsoPossible}
+                </Text>
+                {triageResult.secondary.map((match) => {
+                  const badge = getSeverityBadgeStyle(match.severity);
+                  return (
+                    <View key={match.emergencyId} style={styles.secondaryCard}>
+                      <View style={styles.secondaryCardTop}>
+                        <Text style={styles.secondaryEmergencyTitle}>
+                          {getEmergencyTitle(match.emergencyId)}
+                        </Text>
+                        <View style={[styles.badgeBase, badge.container]}>
+                          <Text style={[styles.badgeTextBase, badge.text]}>
+                            {badge.label}
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={styles.secondaryCardBottom}>
+                        <Text style={styles.secondaryConfidence}>
+                          Confidence: {match.confidence}%
+                        </Text>
+                        <TouchableOpacity
+                          style={styles.secondaryGuideButton}
+                          onPress={() => handleViewGuide(match.emergencyId)}
+                        >
+                          <Text style={styles.secondaryGuideText}>
+                            {t.symptoms.viewGuide}
+                          </Text>
+                          <Ionicons
+                            name="chevron-forward"
+                            size={16}
+                            color="#36D1B6"
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            )}
+
+            {}
+            <TouchableOpacity
+              style={styles.resetButton}
+              activeOpacity={0.8}
+              onPress={handleReset}
+            >
+              <Ionicons name="refresh" size={18} color="#334155" />
+              <Text style={styles.resetButtonText}>{t.symptoms.checkAgain}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {}
+        {!triageResult && (
+          <>
+            <Text style={styles.subtitle}>{t.symptoms.subtitle}</Text>
+            <View style={styles.symptomsContainer}>
+              {symptoms.map((symptom) => {
+                const isSelected = selectedSymptoms.includes(symptom.id);
+                return (
+                  <AnimatedCard
+                    key={symptom.id}
+                    style={[
+                      styles.symptomCard,
+                      isSelected && styles.symptomCardSelected
+                    ]}
+                    onPress={() => toggleSymptom(symptom.id)}
+                  >
+                    <View style={styles.symptomContent}>
+                      <View
+                        style={[
+                          styles.iconContainer,
+                          isSelected && styles.iconContainerSelected
+                        ]}
+                      >
+                        <FontAwesome5
+                          name={symptom.icon}
+                          size={17}
+                          color={isSelected ? '#FFFFFF' : '#36D1B6'}
+                        />
+                      </View>
+                      <Text
+                        style={[
+                          styles.symptomText,
+                          isSelected && styles.symptomTextSelected
+                        ]}
+                      >
+                        {symptom.label}
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.checkbox,
+                        isSelected && styles.checkboxSelected
+                      ]}
+                    >
+                      {isSelected && (
+                        <Ionicons name="checkmark" size={16} color="#FFFFFF" />
+                      )}
+                    </View>
+                  </AnimatedCard>
+                );
+              })}
+            </View>
+
+            <AnimatedCard
+              style={[
+                styles.checkButton,
+                selectedSymptoms.length === 0 && styles.checkButtonDisabled
+              ]}
+              onPress={handleCheck}
+            >
+              <Text style={styles.checkButtonText}>
+                {t.symptoms.checkButton}
+              </Text>
+              <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
+            </AnimatedCard>
+          </>
         )}
       </ScrollView>
     </SafeAreaView>
@@ -149,7 +422,7 @@ const SymptomCheckerScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF'
   },
   header: {
     flexDirection: 'row',
@@ -158,7 +431,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: '#F1F5F9'
   },
   backButton: {
     width: 40,
@@ -166,93 +439,210 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#F8FAFC',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: '800',
     color: '#0F172A',
-    letterSpacing: -0.5,
+    letterSpacing: -0.5
   },
   scrollContent: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingTop: 16,
-    paddingBottom: 40,
+    paddingBottom: 40
   },
   subtitle: {
     fontSize: 14,
     fontWeight: '500',
     color: '#64748B',
-    marginBottom: 24,
-    textAlign: 'center',
+    marginBottom: 18,
+    textAlign: 'center'
+  },
+  criticalBanner: {
+    backgroundColor: '#FEF2F2',
+    borderColor: '#FCA5A5',
+    borderWidth: 1.5,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 20
+  },
+  criticalBannerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 6
+  },
+  criticalBannerTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#991B1B',
+    flex: 1,
+    letterSpacing: -0.3
+  },
+  criticalBannerSub: {
+    fontSize: 13,
+    color: '#7F1D1D',
+    lineHeight: 18,
+    marginBottom: 14,
+    fontWeight: '500'
+  },
+  criticalButtonRow: {
+    flexDirection: 'row',
+    gap: 10
+  },
+  call108Button: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    backgroundColor: '#DC2626',
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12
+  },
+  call108ButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 14
+  },
+  call112Button: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    backgroundColor: '#FEE2E2',
+    borderColor: '#F87171',
+    borderWidth: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12
+  },
+  call112ButtonText: {
+    color: '#DC2626',
+    fontWeight: '700',
+    fontSize: 14
+  },
+  fallbackCard: {
+    backgroundColor: '#FFF7ED',
+    borderColor: '#FDBA74',
+    borderWidth: 1,
+    borderRadius: 18,
+    padding: 18,
+    marginBottom: 18
+  },
+  fallbackHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 8
+  },
+  fallbackTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#9A3412',
+    flex: 1
+  },
+  fallbackDesc: {
+    fontSize: 13.5,
+    color: '#7C2D12',
+    lineHeight: 19,
+    marginBottom: 14
+  },
+  fallbackButtonRow: {
+    flexDirection: 'row',
+    gap: 10
+  },
+  call112OutlineButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#CBD5E1',
+    borderWidth: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12
+  },
+  call112OutlineText: {
+    color: '#0F172A',
+    fontWeight: '600',
+    fontSize: 14
   },
   symptomsContainer: {
-    gap: 12,
-    marginBottom: 24,
+    gap: 10,
+    marginBottom: 20
   },
   symptomCard: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 14,
+    paddingVertical: 13,
     paddingHorizontal: 16,
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     borderWidth: 1,
     borderColor: '#F1F5F9',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.02,
-    shadowRadius: 6,
-    elevation: 1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 5,
+    elevation: 1
   },
   symptomCardSelected: {
     backgroundColor: '#E6F9F5',
     borderColor: '#36D1B6',
+    borderWidth: 1.5
   },
   symptomContent: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 14,
     flex: 1,
+    paddingRight: 10
   },
   iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 38,
+    height: 38,
+    borderRadius: 19,
     backgroundColor: '#F1F5F9',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   iconContainerSelected: {
-    backgroundColor: '#36D1B6',
+    backgroundColor: '#36D1B6'
   },
   symptomText: {
     fontSize: 15,
     color: '#0F172A',
     fontWeight: '600',
+    flex: 1
   },
   symptomTextSelected: {
     color: '#0F172A',
-    fontWeight: '700',
+    fontWeight: '700'
   },
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
     borderWidth: 2,
     borderColor: '#CBD5E1',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   checkboxSelected: {
     backgroundColor: '#36D1B6',
-    borderColor: '#36D1B6',
+    borderColor: '#36D1B6'
   },
   checkButton: {
     flexDirection: 'row',
     backgroundColor: '#36D1B6',
-    height: 56,
+    height: 54,
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
@@ -261,80 +651,188 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.25,
     shadowRadius: 10,
-    elevation: 4,
+    elevation: 4
   },
   checkButtonDisabled: {
     backgroundColor: '#CBD5E1',
     shadowOpacity: 0,
-    elevation: 0,
+    elevation: 0
   },
   checkButtonText: {
     color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: '700',
+    fontSize: 16,
+    fontWeight: '700'
   },
   resultContainer: {
-    marginTop: 8,
-    marginBottom: 24,
+    marginTop: 4,
+    marginBottom: 24
   },
   resultCard: {
     backgroundColor: '#F8FAFC',
-    padding: 24,
+    padding: 20,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E2E8F0',
-    marginBottom: 16,
+    marginBottom: 16
   },
-  resultBadge: {
+  resultHeaderRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    marginBottom: 16,
+    justifyContent: 'space-between',
+    marginBottom: 8
   },
-  resultTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#0F172A',
-  },
-  resultLabel: {
+  resultBadgeText: {
     fontSize: 13,
-    fontWeight: '500',
-    color: '#64748B',
-    marginBottom: 6,
+    fontWeight: '600',
+    color: '#64748B'
   },
-  resultEmergency: {
+  badgeBase: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 8,
+    borderWidth: 1
+  },
+  badgeTextBase: {
+    fontSize: 11.5,
+    fontWeight: '800',
+    letterSpacing: 0.5
+  },
+  badgeCritical: {
+    backgroundColor: '#FEE2E2',
+    borderColor: '#EF4444'
+  },
+  badgeCriticalText: {
+    color: '#B91C1C'
+  },
+  badgeUrgent: {
+    backgroundColor: '#FEF3C7',
+    borderColor: '#F59E0B'
+  },
+  badgeUrgentText: {
+    color: '#B45309'
+  },
+  badgeFirstAid: {
+    backgroundColor: '#E6F9F5',
+    borderColor: '#36D1B6'
+  },
+  badgeFirstAidText: {
+    color: '#0F766E'
+  },
+  resultEmergencyTitle: {
     fontSize: 22,
     fontWeight: '800',
     color: '#0F172A',
-    marginBottom: 20,
-    letterSpacing: -0.5,
+    marginBottom: 8,
+    letterSpacing: -0.5
+  },
+  confidenceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 16
+  },
+  confidenceText: {
+    fontSize: 13,
+    color: '#64748B',
+    fontWeight: '500'
+  },
+  hardFlagTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#FEE2E2',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 6
+  },
+  hardFlagTagText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#B91C1C'
   },
   viewGuideButton: {
     flexDirection: 'row',
-    backgroundColor: '#E02C03',
-    height: 50,
+    height: 48,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 8
+  },
+  viewGuideButtonCritical: {
+    backgroundColor: '#DC2626'
+  },
+  viewGuideButtonStandard: {
+    backgroundColor: '#0F172A'
   },
   viewGuideButtonText: {
     color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '700'
+  },
+  secondarySection: {
+    marginBottom: 16
+  },
+  secondarySectionTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#334155',
+    marginBottom: 10
+  },
+  secondaryCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    marginBottom: 8
+  },
+  secondaryCardTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8
+  },
+  secondaryEmergencyTitle: {
     fontSize: 16,
     fontWeight: '700',
+    color: '#0F172A'
+  },
+  secondaryCardBottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  secondaryConfidence: {
+    fontSize: 12,
+    color: '#64748B',
+    fontWeight: '500'
+  },
+  secondaryGuideButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4
+  },
+  secondaryGuideText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#36D1B6'
   },
   resetButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 14,
+    backgroundColor: '#F1F5F9',
+    paddingVertical: 14,
+    borderRadius: 14,
     gap: 8,
+    marginTop: 6
   },
   resetButtonText: {
     fontSize: 15,
-    color: '#64748B',
-    fontWeight: '600',
-  },
+    color: '#334155',
+    fontWeight: '700'
+  }
 });
 
 export default SymptomCheckerScreen;

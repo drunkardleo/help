@@ -175,7 +175,7 @@ const HomeScreen = () => {
       <PageTransition>
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
-        {/* Header */}
+        {}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>प्रथम सहाय</Text>
           <AnimatedCard onPress={handleLanguageSwitch} style={styles.languageButton}>
@@ -184,7 +184,7 @@ const HomeScreen = () => {
           </AnimatedCard>
         </View>
 
-        {/* Hero Section */}
+        {}
         <View style={styles.heroSection}>
           <Image 
             source={require('../assets/images/logo.png')} 
@@ -195,19 +195,19 @@ const HomeScreen = () => {
           <Text style={styles.appSubtitle}>First Aid for Everyone</Text>
         </View>
 
-        {/* Emergency Call Button */}
+        {}
         <AnimatedCard onPress={handleEmergencyCall} style={styles.emergencyButton} scaleTo={0.97}>
           <Ionicons name="call" size={22} color="#FFFFFF" />
           <Text style={styles.emergencyButtonText}>{t.home.callEmergency}</Text>
         </AnimatedCard>
 
-        {/* Disclaimer */}
+        {}
         <Text style={styles.disclaimer}>{t.home.disclaimer}</Text>
 
-        {/* Quick Actions */}
+        {}
         <Text style={styles.sectionTitle}>{t.home.quickActions}</Text>
         <View style={styles.quickActionsContainer}>
-          {/* 1. All Emergencies (Red Theme) */}
+          {}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/all-emergencies')}
@@ -218,7 +218,7 @@ const HomeScreen = () => {
             <Text style={styles.quickActionText}>{t.home.allEmergencies}</Text>
           </AnimatedCard>
 
-          {/* 2. Check Symptoms (Blue Theme) */}
+          {}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/symptom-checker')}
@@ -229,7 +229,7 @@ const HomeScreen = () => {
             <Text style={styles.quickActionText}>{t.home.checkSymptoms}</Text>
           </AnimatedCard>
 
-          {/* 3. Snake Poisoning (Green Theme) */}
+          {}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/emergency-guide?id=snake_bite')}
@@ -242,7 +242,7 @@ const HomeScreen = () => {
             </Text>
           </AnimatedCard>
 
-          {/* 4. More / Custom Action (Amber/Orange Theme) */}
+          {}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={handleDummyAction}

@@ -88,3 +88,5 @@ android/.gradle/
 android/app/build/
 android/build/
 dumb.md
+frontend/scripts/reset-project.js
+scripts/removeComments.js
