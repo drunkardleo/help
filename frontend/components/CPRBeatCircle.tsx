@@ -13,7 +13,15 @@ export const CPRBeatCircle: React.FC<CPRBeatCircleProps> = ({
   totalBeatsPerCycle = 30,
 }) => {
   const [beatCount, setBeatCount] = useState(1);
+  const [isReady, setIsReady] = useState(false);
   const beatIntervalMs = Math.round(60000 / bpm);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const coreScale = useRef(new Animated.Value(1)).current;
   const wave1Scale = useRef(new Animated.Value(1)).current;
@@ -74,6 +82,7 @@ export const CPRBeatCircle: React.FC<CPRBeatCircleProps> = ({
   }, []);
 
   useEffect(() => {
+    if (!isReady) return;
     let isMounted = true;
 
     const animateBeat = () => {
@@ -160,7 +169,7 @@ export const CPRBeatCircle: React.FC<CPRBeatCircleProps> = ({
       isMounted = false;
       clearInterval(interval);
     };
-  }, [bpm, totalBeatsPerCycle, beatIntervalMs]);
+  }, [bpm, totalBeatsPerCycle, beatIntervalMs, isReady]);
 
   return (
     <View style={styles.container}>

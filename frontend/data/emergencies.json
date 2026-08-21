@@ -12,7 +12,7 @@
       },
       "steps": [
         {
-          "en": "Stay calm and make the person sit or lie down.",
+          "en": "Stay calm and make the injured person sit or lie down.",
           "hi": "शांत रहें और व्यक्ति को बैठाएं या लिटाएं।",
           "mr": "शांत राहा आणि व्यक्तीला बसवा किंवा झोपवा.",
           "mai": "शांत रहू आ व्यक्ति के बैसाऊ या सुताऊ।",
@@ -21,7 +21,7 @@
           "image": "severe_bleeding_step_1"
         },
         {
-          "en": "Place a clean cloth or bandage on the wound.",
+          "en": "Place a clean cloth or dressing over the wound.",
           "hi": "घाव पर साफ कपड़ा या पट्टी रखें।",
           "mr": "जखमेवर स्वच्छ कापड किंवा पट्टी ठेवा.",
           "mai": "घाव पर साफ कपड़ा या पट्टी राखू।",
@@ -30,7 +30,7 @@
           "image": "severe_bleeding_step_2"
         },
         {
-          "en": "Press firmly on the wound to stop the bleeding.",
+          "en": "Press firmly and continuously on the wound to stop the bleeding.",
           "hi": "रक्तस्राव रोकने के लिए घाव पर मजबूती से दबाएं।",
           "mr": "रक्तस्त्राव थांबवण्यासाठी जखमेवर घट्ट दाबा.",
           "mai": "रक्तस्राव रोकबा लेल घाव पर मजबूती सं दबाबू।",
@@ -39,7 +39,7 @@
           "image": "severe_bleeding_step_3"
         },
         {
-          "en": "If blood soaks the cloth, do not remove it. Put another cloth on top.",
+          "en": "If the cloth becomes soaked with blood, do not remove it. Place another clean cloth on top and continue applying pressure.",
           "hi": "यदि कपड़ा खून से भीग जाए, तो इसे न हटाएं। ऊपर से दूसरा कपड़ा रखें।",
           "mr": "जर कापड रक्ताने भिजले तर ते काढू नका. त्यावर दुसरे कापड ठेवा.",
           "mai": "यदि कपड़ा खून सं भीज जाय, त हटाउ नहि। ऊपर सं दोसर कपड़ा राखू।",
@@ -48,7 +48,7 @@
           "image": "severe_bleeding_step_4"
         },
         {
-          "en": "If something is stuck in the wound, do not remove it.",
+          "en": "If an object is stuck in the wound, do not remove it. Apply pressure around the object.",
           "hi": "यदि घाव में कुछ फंसा है, तो उसे न निकालें।",
           "mr": "जर जखमेत काही अडकले असेल तर ते काढू नका.",
           "mai": "यदि घाव मे किछु फंसल अछि त ओकरा नहि निकालू।",
@@ -57,7 +57,7 @@
           "image": "severe_bleeding_step_6"
         },
         {
-          "en": "Call emergency medical help if bleeding does not stop.",
+          "en": "If the bleeding is very heavy or does not stop, get emergency medical help immediately.",
           "hi": "यदि रक्तस्राव बंद नहीं होता है तो आपातकालीन चिकित्सा सहायता बुलाएं।",
           "mr": "रक्तस्त्राव थांबत नसल्यास आपत्कालीन वैद्यकीय मदत कॉल करा.",
           "mai": "यदि रक्तस्राव बंद नहि होय छै त आपातकालीन चिकित्सा सहायता बुलाऊ।",
@@ -79,7 +79,7 @@
       },
       "steps": [
         {
-          "en": "Move the person away from the heat or fire.",
+          "en": "Move the person away from the heat or fire to a safe place.",
           "hi": "व्यक्ति को गर्मी या आग से दूर ले जाएं।",
           "mr": "व्यक्तीला उष्णता किंवा आगीपासून दूर हलवा.",
           "mai": "व्यक्ति के गर्मी या आगि सं दूर लऽ जाऊ।",
@@ -87,7 +87,7 @@
           "bn": "ব্যক্তিকে তাপ বা আগুন থেকে দূরে সরান।"
         },
         {
-          "en": "Remove rings, watches, or clothing near the burn if they are not stuck.",
+          "en": "Remove rings, watches, or clothing near the burn, but do not pull off anything that is stuck to the skin.",
           "hi": "यदि अंगूठी, घड़ी या कपड़े चिपके नहीं हैं तो उन्हें हटा दें।",
           "mr": "अंगठी, घड्याळे किंवा कपडे चिकटलेले नसल्यास काढून टाका.",
           "mai": "यदि अंगूठी, घड़ी या कपड़ा चिपकल नहि छै त हटा दियऽ।",
@@ -95,7 +95,7 @@
           "bn": "আংটি, ঘড়ি বা কাপড় আটকে না থাকলে খুলে ফেলুন।"
         },
         {
-          "en": "Cool the burn with clean running water for at least 20 minutes.",
+          "en": "Cool the burned area with clean, cool running water for at least 10 minutes, preferably for about 20 minutes.",
           "hi": "जले हुए हिस्से को कम से कम 20 मिनट तक साफ बहते पानी से ठंडा करें।",
           "mr": "जळलेल्या भागाला किमान 20 मिनिटे स्वच्छ वाहत्या पाण्याने थंड करा.",
           "mai": "जरल भाग के कम सं कम 20 मिनट तक साफ बहैत पानी सं ठंडा करू।",
@@ -103,7 +103,7 @@
           "bn": "পোড়া স্থানটি কমপক্ষে 20 মিনিট পরিষ্কার বহমান জল দিয়ে ঠান্ডা করুন।"
         },
         {
-          "en": "Do not apply ice, oil, or toothpaste.",
+          "en": "Do not put ice, oil, toothpaste, or any greasy substance on the burn.",
           "hi": "बर्फ, तेल या टूथपेस्ट न लगाएं।",
           "mr": "बर्फ, तेल किंवा टूथपेस्ट लावू नका.",
           "mai": "बरफ, तेल या टूथपेस्ट नहि लगाऊ।",
@@ -111,7 +111,7 @@
           "bn": "বরফ, তেল বা টুথপেস্ট লাগাবেন না।"
         },
         {
-          "en": "Cover the burn with clean plastic wrap or clean cloth.",
+          "en": "Cover the burned area loosely with a clean, dry, non-stick cloth or dressing.",
           "hi": "जले हुए हिस्से को साफ प्लास्टिक रैप या साफ कपड़े से ढकें।",
           "mr": "जळलेल्या भागावर स्वच्छ प्लास्टिक रॅप किंवा स्वच्छ कापड ठेवा.",
           "mai": "जरल भाग के साफ प्लास्टिक रैप या साफ कपड़ा सं ढकू।",
@@ -119,7 +119,7 @@
           "bn": "পোড়া স্থানটি পরিষ্কার প্লাস্টিক র্যাপ বা পরিষ্কার কাপড় দিয়ে ঢেকে দিন।"
         },
         {
-          "en": "Keep the person warm and calm.",
+          "en": "Keep the person calm and prevent them from getting too cold while cooling a large burn.",
           "hi": "व्यक्ति को गर्म और शांत रखें।",
           "mr": "व्यक्तीला उबदार आणि शांत ठेवा.",
           "mai": "व्यक्ति के गर्म आ शांत राखू।",
@@ -127,7 +127,7 @@
           "bn": "ব্যক্তিকে উষ্ণ এবং শান্ত রাখুন।"
         },
         {
-          "en": "Seek medical help if the burn is large or very painful.",
+          "en": "Get medical help immediately if the burn is large or deep, has blisters, or affects the face, hands, feet, joints, neck, or private parts.",
           "hi": "यदि जलन बड़ी या बहुत दर्दनाक है तो चिकित्सा सहायता लें।",
           "mr": "जळजळ मोठी किंवा खूप वेदनादायक असल्यास वैद्यकीय मदत घ्या.",
           "mai": "यदि जरल बड़ अछि या बहुत दर्दनाक अछि त चिकित्सा सहायता लिअ।",
@@ -224,7 +224,7 @@
       },
       "steps": [
         {
-          "en": "Call emergency medical help immediately.",
+          "en": "Call 112 for emergency help immediately. Tell them the person's condition and your location.",
           "hi": "तुरंत आपातकालीन चिकित्सा सहायता बुलाएं।",
           "mr": "तात्काळ आपत्कालीन वैद्यकीय मदत कॉल करा.",
           "mai": "तुरंत आपातकालीन चिकित्सा सहायता बुलाऊ।",
@@ -232,7 +232,7 @@
           "bn": "অবিলম্বে জরুরি চিকিৎসা সহায়তার জন্য কল করুন।"
         },
         {
-          "en": "Help the person sit down and rest in a comfortable position.",
+          "en": "Keep the person in a comfortable sitting position with their upper body slightly raised. Support their head and back and do not let them move unnecessarily.",
           "hi": "व्यक्ति को बैठने और आरामदायक स्थिति में आराम करने में मदद करें।",
           "mr": "व्यक्तीला बसण्यास आणि आरामदायक स्थितीत विश्रांती घेण्यास मदत करा.",
           "mai": "व्यक्ति के बैसबा आ आरामदायक स्थिति मे आराम करबा मे मदद करू।",
@@ -240,7 +240,7 @@
           "bn": "ব্যক্তিকে বসতে এবং আরামদায়ক অবস্থানে বিশ্রাম নিতে সাহায্য করুন।"
         },
         {
-          "en": "Keep the person calm and reassure them.",
+          "en": "If the person is conscious and has chest pain, after calling for emergency help, ask them to chew and swallow 162 to 325 mg of aspirin. Do not give aspirin if they are allergic to it or if a doctor has told them not to take it.",
           "hi": "व्यक्ति को शांत रखें और उन्हें आश्वस्त करें।",
           "mr": "व्यक्तीला शांत ठेवा आणि त्यांना धीर द्या.",
           "mai": "व्यक्ति के शांत राखू आ आश्वस्त करू।",
@@ -248,7 +248,7 @@
           "bn": "ব্যক্তিকে শান্ত রাখুন এবং তাদের আশ্বস্ত করুন।"
         },
         {
-          "en": "Loosen tight clothing around the chest or neck.",
+          "en": "Loosen tight clothing around the neck, waist, or body so the person can breathe more easily.",
           "hi": "छाती या गर्दन के आसपास के कसे हुए कपड़ों को ढीला करें।",
           "mr": "छातीभोवती किंवा मानेभोवती घट्ट कपडे सैल करा.",
           "mai": "छाती या गर्दन क चारु कात कसल कपड़ा के ढीला करू।",
@@ -256,7 +256,7 @@
           "bn": "বুক বা ঘাড়ের চারপাশে টাইট পোশাক আলগা করুন।"
         },
         {
-          "en": "If the person has prescribed heart medicine, help them take it.",
+          "en": "Stay with the person and keep them calm. Do not leave them alone until help arrives.",
           "hi": "यदि व्यक्ति के पास निर्धारित हृदय की दवा है, तो उसे लेने में उनकी मदद करें।",
           "mr": "जर व्यक्तीकडे हृदयाचे लिहून दिलेले औषध असेल तर ते घेण्यास मदत करा.",
           "mai": "यदि व्यक्ति के पास निर्धारित हृदय क दवा अछि त ओकरा लेबाक मे मदद करू।",
@@ -264,7 +264,7 @@
           "bn": "ব্যক্তির যদি নির্ধারিত হার্টের ওষুধ থাকে তবে তা খেতে সাহায্য করুন।"
         },
         {
-          "en": "If trained and available, give one aspirin to chew.",
+          "en": "Keep checking the person's awareness and breathing. Get medical help immediately if their condition gets worse.",
           "hi": "यदि प्रशिक्षित हैं और उपलब्ध है, तो चबाने के लिए एक एस्पिरिन दें।",
           "mr": "प्रशिक्षित असल्यास आणि उपलब्ध असल्यास चघळण्यासाठी एक अॅस्पिरिन द्या.",
           "mai": "यदि प्रशिक्षित छी आ उपलब्ध अछि त चबाबै लेल एक एस्पिरिन दियऽ।",
@@ -272,7 +272,7 @@
           "bn": "প্রশিক্ষিত এবং উপলব্ধ থাকলে চিবানোর জন্য একটি অ্যাসপিরিন দিন।"
         },
         {
-          "en": "If the person stops breathing, begin CPR immediately.",
+          "en": "If the person becomes unconscious and is not breathing normally, start CPR immediately.",
           "hi": "यदि व्यक्ति सांस लेना बंद कर दे, तो तुरंत सीपीआर शुरू करें।",
           "mr": "जर व्यक्ती श्वास घेणे बंद करते तर त्वरित सीपीआर सुरू करा.",
           "mai": "यदि व्यक्ति सांस लेब बंद कऽ दैत छथि त तुरंत सीपीआर शुरू करू।",
@@ -304,7 +304,7 @@
           },
           "steps": [
             {
-              "en": "Check if the person is breathing.",
+              "en": "Make sure you and the person are safe. Call for help immediately.",
               "hi": "जांचें कि व्यक्ति सांस ले रहा है या नहीं।",
               "mr": "व्यक्ती श्वास घेत आहे का ते तपासा.",
               "mai": "जांचू कि व्यक्ति सांस लऽ रहल छथि कि नहि।",
@@ -312,7 +312,7 @@
               "bn": "ব্যক্তি শ্বাস নিচ্ছে কিনা তা পরীক্ষা করুন।"
             },
             {
-              "en": "If not breathing, call emergency services immediately.",
+              "en": "Check if the person responds. Check their breathing. If the person is unconscious and not breathing normally, start CPR immediately.",
               "hi": "यदि सांस नहीं ले रहा है, तो तुरंत आपातकालीन सेवाओं को बुलाएं।",
               "mr": "श्वास घेत नसल्यास तात्काळ आपत्कालीन सेवांना कॉल करा.",
               "mai": "यदि सांस नहि लऽ रहल छथि त तुरंत आपातकालीन सेवा के बुलाऊ।",
@@ -320,7 +320,7 @@
               "bn": "শ্বাস না নিলে অবিলম্বে জরুরি পরিষেবাগুলিতে কল করুন।"
             },
             {
-              "en": "Lay the person on their back on a firm surface.",
+              "en": "Lay the person on their back and open their airway. Then check their breathing.",
               "hi": "व्यक्ति को एक मजबूत सतह पर उनकी पीठ के बल लिटा दें।",
               "mr": "व्यक्तीला एका घट्ट पृष्ठभागावर त्यांच्या पाठीवर झोपवा.",
               "mai": "व्यक्ति के एक मजबूत सतह पर ओकर पीठ क बल सुता दियऽ।",
@@ -328,7 +328,7 @@
               "bn": "ব্যক্তিকে একটি শক্ত পৃষ্ঠে তাদের পিঠে শুইয়ে দিন।"
             },
             {
-              "en": "Place both hands in the center of the chest.",
+              "en": "Place one hand in the center of the chest. Put your other hand on top and lock your fingers together.",
               "hi": "छाती के केंद्र में दोनों हाथ रखें।",
               "mr": "छातीच्या मध्यभागी दोन्ही हात ठेवा.",
               "mai": "छाती क केंद्र मे दुनू हाथ राखू।",
@@ -336,7 +336,7 @@
               "bn": "বুকের মাঝখানে উভয় হাত রাখুন।"
             },
             {
-              "en": "Push hard and fast about 2 times every second.",
+              "en": "Press the chest down about 5 to 6 cm. Let the chest come back up fully after each compression.",
               "hi": "प्रत्येक सेकंड में लगभग 2 बार जोर से और तेजी से धक्का दें।",
               "mr": "दर सेकंदाला सुमारे 2 वेळा जोरात आणि वेगाने ढकलून द्या.",
               "mai": "प्रत्येक सेकंड मे लगभग 2 बेर जोर सं आ तेज सं धक्का दियऽ।",
@@ -344,7 +344,7 @@
               "bn": "প্রতি সেকেন্ডে প্রায় 2 বার জোরে এবং দ্রুত চাপুন।"
             },
             {
-              "en": "After 30 pushes give 2 rescue breaths if trained.",
+              "en": "Give 30 chest compressions. If you are trained, give 2 rescue breaths. Repeat this cycle. If rescue breaths are not possible, continue with chest compressions only.",
               "hi": "यदि प्रशिक्षित हैं तो 30 धक्कों के बाद 2 बचाव सांस दें।",
               "mr": "प्रशिक्षित असल्यास 30 धक्क्यांनंतर 2 बचाव श्वास द्या.",
               "mai": "यदि प्रशिक्षित छी त 30 धक्का क बाद 2 बचाव सांस दियऽ।",
@@ -352,7 +352,7 @@
               "bn": "প্রশিক্ষিত হলে 30টি ধাক্কার পরে 2টি উদ্ধার শ্বাস দিন।"
             },
             {
-              "en": "Continue until help arrives.",
+              "en": "Continue CPR until the person starts breathing normally or trained help arrives. Stop if you become too tired or the area becomes unsafe.",
               "hi": "मदद आने तक जारी रखें।",
               "mr": "मदत येईपर्यंत चालू ठेवा.",
               "mai": "मदद आबै तक जारी राखू।",
@@ -373,7 +373,7 @@
           },
           "steps": [
             {
-              "en": "Check if the child is breathing.",
+              "en": "Make sure you and the child are safe. Call for help immediately.",
               "hi": "जांचें कि बच्चा सांस ले रहा है या नहीं।",
               "mr": "मूल श्वास घेत आहे का ते तपासा.",
               "mai": "जांचू कि बच्चा सांस लऽ रहल अछि कि नहि।",
@@ -381,7 +381,7 @@
               "bn": "শিশু শ্বাস নিচ্ছে কিনা তা পরীক্ষা করুন।"
             },
             {
-              "en": "Call emergency services if the child is not breathing.",
+              "en": "Check if the child responds. Check their breathing. If the child is unconscious and not breathing normally, start CPR immediately.",
               "hi": "यदि बच्चा सांस नहीं ले रहा है तो आपातकालीन सेवाओं को बुलाएं।",
               "mr": "मूल श्वास घेत नसल्यास आपत्कालीन सेवांना कॉल करा.",
               "mai": "यदि बच्चा सांस नहि लऽ रहल अछि त आपातकालीन सेवा के बुलाऊ।",
@@ -389,7 +389,7 @@
               "bn": "শিশু শ্বাস না নিলে জরুরি পরিষেবাগুলিতে কল করুন।"
             },
             {
-              "en": "Lay the child on their back on a firm surface.",
+              "en": "Lay the child on a safe, firm surface and open their airway. Then check their breathing.",
               "hi": "बच्चे को एक मजबूत सतह पर उसकी पीठ के बल लिटा दें।",
               "mr": "मुलाला एका घट्ट पृष्ठभागावर त्यांच्या पाठीवर झोपवा.",
               "mai": "बच्चा के एक मजबूत सतह पर ओकर पीठ क बल सुता दियऽ।",
@@ -397,7 +397,7 @@
               "bn": "শিশুটিকে একটি শক্ত পৃষ্ঠে তাদের পিঠে শুইয়ে দিন।"
             },
             {
-              "en": "Place one hand in the center of the chest.",
+              "en": "Place one hand in the center of the child's chest.",
               "hi": "छाती के केंद्र में एक हाथ रखें।",
               "mr": "छातीच्या मध्यभागी एक हात ठेवा.",
               "mai": "छाती क केंद्र मे एक हाथ राखू।",
@@ -405,7 +405,7 @@
               "bn": "বুকের মাঝখানে একটি হাত রাখুন।"
             },
             {
-              "en": "Push down hard and fast about 2 times per second.",
+              "en": "Press down on the chest with one hand. Let the chest come back up fully after each compression.",
               "hi": "प्रति सेकंड लगभग 2 बार जोर से और तेजी से नीचे धकेलें।",
               "mr": "प्रति सेकंद सुमारे 2 वेळा जोरात आणि वेगाने खाली ढकलून द्या.",
               "mai": "प्रति सेकंड लगभग 2 बेर जोर सं आ तेज सं नीचा धकेलू।",
@@ -413,7 +413,7 @@
               "bn": "প্রতি সেকেন্ডে প্রায় 2 বার জোরে এবং দ্রুত নিচে চাপুন।"
             },
             {
-              "en": "After 30 pushes give 2 rescue breaths.",
+              "en": "If you are trained, give rescue breaths and continue chest compressions.",
               "hi": "30 धक्कों के बाद 2 बचाव सांस दें।",
               "mr": "30 धक्क्यांनंतर 2 बचाव श्वास द्या.",
               "mai": "30 धक्का क बाद 2 बचाव सांस दियऽ।",
@@ -421,7 +421,7 @@
               "bn": "30টি ধাক্কার পরে 2টি উদ্ধার শ্বাস দিন।"
             },
             {
-              "en": "Continue until the child starts breathing or help arrives.",
+              "en": "Continue CPR until help arrives or the child starts breathing normally.",
               "hi": "बच्चा सांस लेना शुरू करने या मदद आने तक जारी रखें।",
               "mr": "मूल श्वास घेणे सुरू करेपर्यंत किंवा मदत येईपर्यंत चालू ठेवा.",
               "mai": "बच्चा सांस लेब शुरू करै तक या मदद आबै तक जारी राखू।",
@@ -442,7 +442,7 @@
           },
           "steps": [
             {
-              "en": "Check if the baby is breathing.",
+              "en": "Make sure you and the baby are safe. Call for help immediately and do not leave the baby alone.",
               "hi": "जांचें कि शिशु सांस ले रहा है या नहीं।",
               "mr": "बाळ श्वास घेत आहे का ते तपासा.",
               "mai": "जांचू कि शिशु सांस लऽ रहल अछि कि नहि।",
@@ -450,7 +450,7 @@
               "bn": "শিশু শ্বাস নিচ্ছে কিনা তা পরীক্ষা করুন।"
             },
             {
-              "en": "Call emergency help immediately if the baby is not breathing.",
+              "en": "Check if the baby is breathing. Look for movement of the chest or stomach, listen for breathing sounds, and feel for air coming out.",
               "hi": "यदि शिशु सांस नहीं ले रहा है तो तुरंत आपातकालीन सहायता बुलाएं।",
               "mr": "बाळ श्वास घेत नसल्यास तात्काळ आपत्कालीन मदत कॉल करा.",
               "mai": "यदि शिशु सांस नहि लऽ रहल अछि त तुरंत आपातकालीन सहायता बुलाऊ।",
@@ -458,7 +458,7 @@
               "bn": "শিশু শ্বাস না নিলে অবিলম্বে জরুরি সাহায্যের জন্য কল করুন।"
             },
             {
-              "en": "Lay the baby on their back on a firm surface.",
+              "en": "Lay the baby on a safe, firm surface. Gently tilt the head back and lift the chin. Do not press the soft area under the chin.",
               "hi": "शिशु को एक मजबूत सतह पर उसकी पीठ के बल लिटा दें।",
               "mr": "बाळाला एका घट्ट पृष्ठभागावर त्यांच्या पाठीवर झोपवा.",
               "mai": "शिशु के एक मजबूत सतह पर ओकर पीठ क बल सुता दियऽ।",
@@ -474,7 +474,7 @@
               "bn": "শিশুর বুকের মাঝখানে দুটি আঙুল রাখুন।"
             },
             {
-              "en": "Press down gently but firmly about 2 times per second.",
+              "en": "Press the chest down about one-third of its depth using two fingers. Let the chest come back up fully after each compression.",
               "hi": "प्रति सेकंड लगभग 2 बार धीरे से लेकिन मजबूती से नीचे दबाएं।",
               "mr": "प्रति सेकंद सुमारे 2 वेळा हळूवारपणे पण घट्ट खाली दाबा.",
               "mai": "प्रति सेकंड लगभग 2 बेर धीरे सं लेकिन मजबूती सं नीचा दबाबू।",
@@ -482,7 +482,7 @@
               "bn": "প্রতি সেকেন্ডে প্রায় 2 বার আলতো করে কিন্তু দৃঢ়ভাবে নিচে চাপুন।"
             },
             {
-              "en": "After 30 pushes give 2 gentle breaths.",
+              "en": "Cover the baby's mouth and nose with your mouth and gently give a rescue breath. Check that the chest rises.",
               "hi": "30 धक्कों के बाद 2 कोमल सांस दें।",
               "mr": "30 धक्क्यांनंतर 2 हळुवार श्वास द्या.",
               "mai": "30 धक्का क बाद 2 कोमल सांस दियऽ।",
@@ -490,7 +490,7 @@
               "bn": "30টি ধাক্কার পরে 2টি মৃদু শ্বাস দিন।"
             },
             {
-              "en": "Continue until help arrives.",
+              "en": "Continue 30 chest compressions followed by 2 rescue breaths. Continue until the baby wakes up and breathes normally, trained help arrives, or the area becomes unsafe.",
               "hi": "मदद आने तक जारी रखें।",
               "mr": "मदत येईपर्यंत चालू ठेवा.",
               "mai": "मदद आबै तक जारी राखू।",
@@ -513,7 +513,7 @@
       },
       "steps": [
         {
-          "en": "Keep the person calm, still, and quiet. Movement speeds venom spread.",
+          "en": "Stay calm. Keep the person calm and do not let them walk or run.",
           "hi": "व्यक्ति को शांत और स्थिर रखें। हिलने-डुलने से जहर तेजी से फैलता है।",
           "mr": "व्यक्तीला शांत आणि स्थिर ठेवा. हालचालीमुळे विष वेगाने पसरते.",
           "mai": "व्यक्ति के शांत आ स्थिर राखू। हिलला-डुलला सं विष तेजी सं पसरैत अछि।",
@@ -521,7 +521,15 @@
           "bn": "ব্যক্তিকে শান্ত ও স্থির রাখুন। নড়াচড়া বিষ দ্রুত ছড়িয়ে দেয়।"
         },
         {
-          "en": "Remove rings, watches, or tight clothing near the bite before swelling starts.",
+          "en": "Keep the bitten arm or leg still. Move it as little as possible.",
+          "hi": "काटे गए अंग को स्थिर रखें। इसे यथासंभव कम हिलाएं।",
+          "mr": "चावलेला हात किंवा पाय स्थिर ठेवा. तो शक्य तितका कमी हलवा.",
+          "mai": "काटल अंग के स्थिर राखू। ओकरा यथासंभव कम हिलाऊ।",
+          "bho": "काटल हाथ या पैर के स्थिर रखीं। ओकरा जितना कम हो सके हिलाईं।",
+          "bn": "দংশিত হাত বা পা স্থির রাখুন। যতটা সম্ভব কম নড়াচড়া করুন।"
+        },
+        {
+          "en": "Remove rings, watches, bangles, or anything tight immediately.",
           "hi": "सूजन शुरू होने से पहले दंश के पास के छल्ले, घड़ियां या तंग कपड़े हटा दें।",
           "mr": "सूज येण्यापूर्वी चावलेल्या भागाजवळील अंगठ्या, घड्याळे किंवा घट्ट कपडे काढून टाका.",
           "mai": "सूजन शुरू होय सं पहिने घावक पासक अंगूठी, घड़ी या तंग कपड़ा हटा दियऽ।",
@@ -529,28 +537,60 @@
           "bn": "ফোলা শুরু হওয়ার আগে কামড়ের চারপাশের আংটি, ঘড়ি বা আঁটসাঁট পোশাক সরিয়ে ফেলুন।"
         },
         {
-          "en": "Keep the bitten area at or slightly below the level of the heart.",
-          "hi": "काटे गए अंग को हृदय के स्तर से नीचे या बराबर रखें।",
-          "mr": "चावलेला भाग हृदयाच्या पातळीवर किंवा किंचित खाली ठेवा.",
-          "mai": "काटल भाग के हृदयक स्तर सं नीचा या बराबर राखू।",
-          "bho": "काटल अंग के दिल के लेवल से नीचे या बराबर रखीं।",
-          "bn": "কামড়ের অংশটি হৃদপিণ্ডের স্তরে বা সামান্য নিচে রাখুন।"
+          "en": "Do not try to catch or kill the snake. If it is safe, try to note what kind of snake bit the person.",
+          "hi": "सांप को पकड़ने या मारने की कोशिश न करें। यदि सुरक्षित हो, तो ध्यान दें कि किस तरह का सांप था।",
+          "mr": "साप पकडण्याचा किंवा मारण्याचा प्रयत्न करू नका. सुरक्षित असल्यास तो कोणत्या प्रकारचा साप होता ते लक्षात ठेवा.",
+          "mai": "सांप के पकड़बा या मारबाक प्रयास नहि करू। सुरक्षित होय त ध्यान दियऽ कि कोना सांप छल।",
+          "bho": "सांप के पकड़े या मारे के कोसिस मत करीं। अगर सुरक्षित होखे त धेयान दीं कि कइसन सांप रहे।",
+          "bn": "সাপটি ধরার বা মারার চেষ্টা করবেন না। নিরাপদ হলে কী ধরণের সাপ ছিল তা লক্ষ্য রাখুন।"
         },
         {
-          "en": "Do NOT cut the wound, do NOT suck the venom, and do NOT apply a tourniquet or ice.",
-          "hi": "घाव को न काटें, जहर न चूसें, और कोई टाइट पट्टी (tourniquet) या बर्फ न लगाएं।",
-          "mr": "जखम कापू नका, विष चोखू नका आणि घट्ट पट्टी किंवा बर्फ लावू नका.",
-          "mai": "घाव के नहि काटू, विष नहि चूसू, आ बर्फ या टाइट पट्टी नहि लगाबू।",
-          "bho": "घाव के मत काटीं, जहर मत चूसीं, आ बर्फ या बहुते टाइट पट्टी मत लगाईं।",
-          "bn": "ক্ষত কাটবেন না, বিষ চুষবেন না এবং আঁটসাঁট ব্যান্ডেজ বা বরফ লাগাবেন না।"
+          "en": "Do Not Make These Mistakes:\n• Do not try to suck out or squeeze out the venom.\n• Do not apply herbs to the bite.\n• Do not use a tourniquet or tie a very tight bandage.",
+          "hi": "ये गलतियाँ न करें:\n• जहर चूसने या निकालने की कोशिश न करें।\n• घाव पर जड़ी-बूटियाँ न लगाएं।\n• बहुत टाइट पट्टी (tourniquet) न बांधें।",
+          "mr": "या चुका करू नका:\n• विष चोखण्याचा किंवा पिळण्याचा प्रयत्न करू नका.\n• चाव्यावर वनस्पती किंवा औषधी लावू नका.\n• अतिशय घट्ट पट्टी बांधू नका.",
+          "mai": "ई गलती नहि करू:\n• विष चूसबाक या निकालबाक प्रयास नहि करू।\n• घाव पर जड़ी-बूटी नहि लगाबू।\n• बहुत कड़ा पट्टी नहि बान्हू।",
+          "bho": "ई गलती मत करीं:\n• जहर चूसे या निकाले के कोसिस मत करीं।\n• घाव पर जड़ी-बूटी मत लगाईं।\n• बहुत टाइट पट्टी मत बान्हीं।",
+          "bn": "এই ভুলগুলি করবেন না:\n• বিষ চুষে বা চেপে বের করার চেষ্টা করবেন না।\n• কামড়ে ভেষজ লাগাবেন না।\n• খুব আঁটসাঁট ব্যান্ডেজ বাঁধবেন না।"
         },
         {
-          "en": "Call emergency 112 immediately and transport the person to the nearest hospital with anti-venom.",
-          "hi": "तुरंत 112 पर कॉल करें और व्यक्ति को निकटतम अस्पताल ले जाएं जहां एंटी-वेनम उपलब्ध हो।",
-          "mr": "लगेच 112 वर कॉल करा आणि व्यक्तीला अँटी-व्हेनम उपलब्ध असलेल्या जवळच्या रुग्णालयात घेऊन जा.",
-          "mai": "तुरंत 112 पर कॉल करू आ व्यक्ति के निकटतम अस्पताल लऽ जाऊ जाहिठाम एंटी-वेनम उपलब्ध हो।",
-          "bho": "तुरंत 112 पर कॉल करीं आ आदमी के नजदीकी अस्पताल ले जाईं जहाँ एंटी-वेनम उपलब्ध होखे।",
-          "bn": "অবিলম্বে 112 নম্বরে কল করুন এবং রোগীকে নিকটস্থ অ্যান্টি-ভেনম সুবিধাযুক্ত হাসপাতালে নিয়ে যান।"
+          "en": "Watch for changes in the person's condition, such as loss of consciousness or changes in breathing.",
+          "hi": "व्यक्ति की स्थिति में बदलाव पर नज़र रखें, जैसे बेहोशी या सांस लेने में बदलाव।",
+          "mr": "व्यक्तीच्या स्थितीत होणाऱ्या बदलांवर लक्ष ठेवा, जसे की बेशुद्ध पडणे किंवा श्वासोच्छवासात बदल.",
+          "mai": "व्यक्ति क स्थिति मे बदलाव पर नजरि राखू, जेना बेहोशी या सांस लेब मे बदलाव।",
+          "bho": "आदमी के हालत में बदलाव पर नजर रखीं, जइसे बेहोशी या सांस लेबे में बदलाव।",
+          "bn": "ব্যক্তির অবস্থার পরিবর্তনের দিকে লক্ষ্য রাখুন, যেমন চেতনা হারানো বা শ্বাসকষ্ট।"
+        },
+        {
+          "en": "Take the person to the nearest hospital or health center as quickly as possible.",
+          "hi": "व्यक्ति को जितनी जल्दी हो सके नजदीकी अस्पताल या स्वास्थ्य केंद्र ले जाएं।",
+          "mr": "व्यक्तीला शक्य तितक्या लवकर जवळच्या रुग्णालयात किंवा आरोग्य केंद्रात घेऊन जा.",
+          "mai": "व्यक्ति के जतेक जल्दी होय नजदीकी अस्पताल लऽ जाऊ।",
+          "bho": "आदमी के जितना जल्दी हो सके नजदीकी अस्पताल ले जाईं।",
+          "bn": "ব্যক্তিকে যত দ্রুত সম্ভব নিকটস্থ হাসপাতাল বা স্বাস্থ্যকেন্দ্রে নিয়ে যান।"
+        },
+        {
+          "en": "If the Person Stops Breathing:\nStart CPR immediately and call emergency services for medical help.",
+          "hi": "यदि व्यक्ति सांस लेना बंद कर दे:\nतुरंत सीपीआर शुरू करें और चिकित्सा सहायता के लिए आपातकालीन सेवाओं को बुलाएं।",
+          "mr": "व्यक्तीने श्वास घेणे बंद केल्यास:\nत्वरित सीपीआर सुरू करा आणि वैद्यकीय मदतीसाठी आपत्कालीन सेवांना कॉल करा.",
+          "mai": "यदि व्यक्ति सांस लेब बंद कऽ दैत छथि:\nतुरंत सीपीआर शुरू करू आ आपातकालीन सेवा के बुलाऊ।",
+          "bho": "अगर आदमी सांस लेब बंद कर देत बा:\nतुरंत सीपीआर शुरू करीं आ आपातकालीन सेवा के बुलाईं।",
+          "bn": "ব্যক্তি শ্বাস নেওয়া বন্ধ করলে:\nঅবিলম্বে সিপিআর শুরু করুন এবং জরুরি পরিষেবাগুলিতে কল করুন।"
+        },
+        {
+          "en": "If Venom Gets into the Eye:\nWash the eye continuously with clean water for 10 to 15 minutes and get medical help immediately.",
+          "hi": "यदि जहर आंख में चला जाए:\nआंख को 10 से 15 मिनट तक लगातार साफ पानी से धोएं और तुरंत चिकित्सा सहायता लें।",
+          "mr": "डोळ्यात विष गेल्यास:\nडोळा १० ते १५ मिनिटे स्वच्छ पाण्याने सतत धुवा आणि तात्काळ वैद्यकीय मदत घ्या.",
+          "mai": "यदि विष आँखि मे चल जाय:\nआँखि के 10 सं 15 मिनट तक लगातार साफ पानी सं धोऊ आ तुरंत डॉक्टर क सहायता लिअ।",
+          "bho": "अगर जहर आंख में चल जाय:\nआंख के 10 से 15 मिनट तक लगातार साफ पानी से धोईं आ तुरंत चिकित्सा मदद लीं।",
+          "bn": "চোখে বিষ ঢুকলে:\nপরিষ্কার জল দিয়ে ১০ থেকে ১৫ মিনিট ধরে ক্রমাগত চোখ ধুয়ে নিন এবং অবিলম্বে চিকিৎসা সহায়তা নিন।"
+        },
+        {
+          "en": "If You Are Alone:\nCall someone for help. Remove rings or watches immediately. Keep the bitten arm or leg as still as possible and get medical help as soon as possible.",
+          "hi": "यदि आप अकेले हैं:\nमदद के लिए किसी को बुलाएं। तुरंत अंगूठी या घड़ी हटा दें। काटे गए हाथ या पैर को जितना संभव हो स्थिर रखें और जल्द से जल्द चिकित्सा सहायता प्राप्त करें।",
+          "mr": "तुम्ही एकटे असल्यास:\nमदतीसाठी कोणालातरी बोलवा. ताबडतोब अंगठ्या किंवा घड्याळे काढून टाका. चावलेला हात किंवा पाय शक्य तितका स्थिर ठेवा आणि लवकरात लवकर वैद्यकीय मदत मिळवा.",
+          "mai": "यदि अपने अकेले छी:\nमदद लेल ककरो बुलाऊ। तुरंत अंगूठी या घड़ी हटा दियऽ। काटल हाथ या पैर के स्थिर राखू आ जल्द सं जल्द चिकित्सा सहायता प्राप्त करू।",
+          "bho": "अगर रउरा अकेले बानी:\nमदद खातिर केहू के बुलाईं। तुरंत अंगूठी या घड़ी हटा दीं। काटल हाथ या पैर के स्थिर रखीं आ जल्द से जल्द चिकित्सा मदद लीं।",
+          "bn": "আপনি একা থাকলে:\nসাহায্যের জন্য কাউকে ডাকুন। অবিলম্বে আংটি বা ঘড়ি খুলে ফেলুন। দংশিত অঙ্গ যতটা সম্ভব স্থির রাখুন এবং দ্রুত চিকিৎসা সহায়তা নিন।"
         }
       ]
     }

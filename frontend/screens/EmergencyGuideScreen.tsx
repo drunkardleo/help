@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking, Image, StatusBar, Alert } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView, Linking, Image, StatusBar, Alert, Animated, Easing } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AnimatedCard } from '../components/AnimatedCard';
@@ -36,6 +37,93 @@ const emergencyImages: Record<string, any> = {
   severe_bleeding_step_7: require('../assets/images/bleeding/severe_bleeding_step_7.jpg'),
 };
 
+const severeBleedingAudios: Record<number, any> = {
+  0: require('../assets/audio/english/severe_bleeding/step1.wav'),
+  1: require('../assets/audio/english/severe_bleeding/step2.wav'),
+  2: require('../assets/audio/english/severe_bleeding/step3.wav'),
+  3: require('../assets/audio/english/severe_bleeding/step4.wav'),
+  4: require('../assets/audio/english/severe_bleeding/step5.wav'),
+  5: require('../assets/audio/english/severe_bleeding/step6.wav'),
+};
+
+const burnsAudios: Record<number, any> = {
+  0: require('../assets/audio/english/burns/step1.wav'),
+  1: require('../assets/audio/english/burns/step2.wav'),
+  2: require('../assets/audio/english/burns/step3.wav'),
+  3: require('../assets/audio/english/burns/step4.wav'),
+  4: require('../assets/audio/english/burns/step5.wav'),
+  5: require('../assets/audio/english/burns/step6.wav'),
+  6: require('../assets/audio/english/burns/step7.wav'),
+};
+
+const shockAudios: Record<number, any> = {
+  0: require('../assets/audio/english/shock/step1.wav'),
+  1: require('../assets/audio/english/shock/step2.wav'),
+  2: require('../assets/audio/english/shock/step3.wav'),
+  3: require('../assets/audio/english/shock/step4.wav'),
+  4: require('../assets/audio/english/shock/step5.wav'),
+  5: require('../assets/audio/english/shock/step6.wav'),
+  6: require('../assets/audio/english/shock/step7.wav'),
+};
+
+const heartAttackAudios: Record<number, any> = {
+  0: require('../assets/audio/english/heart_attack/step1.wav'),
+  1: require('../assets/audio/english/heart_attack/step2.wav'),
+  2: require('../assets/audio/english/heart_attack/step3.wav'),
+  3: require('../assets/audio/english/heart_attack/step4.wav'),
+  4: require('../assets/audio/english/heart_attack/step5.wav'),
+  5: require('../assets/audio/english/heart_attack/step6.wav'),
+  6: require('../assets/audio/english/heart_attack/step7.wav'),
+};
+
+const cprAdultAudios: Record<number, any> = {
+  0: require('../assets/audio/english/cpr/adult/step1.wav'),
+  1: require('../assets/audio/english/cpr/adult/step2.wav'),
+  2: require('../assets/audio/english/cpr/adult/step3.wav'),
+  3: require('../assets/audio/english/cpr/adult/step4.wav'),
+  4: require('../assets/audio/english/cpr/adult/step5.wav'),
+  5: require('../assets/audio/english/cpr/adult/step6.wav'),
+  6: require('../assets/audio/english/cpr/adult/step7.wav'),
+};
+
+const cprChildAudios: Record<number, any> = {
+  0: require('../assets/audio/english/cpr/child/step1.wav'),
+  1: require('../assets/audio/english/cpr/child/step2.wav'),
+  2: require('../assets/audio/english/cpr/child/step3.wav'),
+  3: require('../assets/audio/english/cpr/child/step4.wav'),
+  4: require('../assets/audio/english/cpr/child/step5.wav'),
+  5: require('../assets/audio/english/cpr/child/step6.wav'),
+  6: require('../assets/audio/english/cpr/child/step7.wav'),
+};
+
+const cprBabyAudios: Record<number, any> = {
+  0: require('../assets/audio/english/cpr/baby/step1.wav'),
+  1: require('../assets/audio/english/cpr/baby/step2.wav'),
+  2: require('../assets/audio/english/cpr/baby/step3.wav'),
+  3: require('../assets/audio/english/cpr/baby/step4.wav'),
+  4: require('../assets/audio/english/cpr/baby/step5.wav'),
+  5: require('../assets/audio/english/cpr/baby/step6.wav'),
+  6: require('../assets/audio/english/cpr/baby/step7.wav'),
+};
+
+const snakeBiteAudios: Record<number, any> = {
+  0: require('../assets/audio/english/snake_poison/step1.wav'),
+  1: require('../assets/audio/english/snake_poison/step2.wav'),
+  2: require('../assets/audio/english/snake_poison/step3.wav'),
+  3: require('../assets/audio/english/snake_poison/step4.wav'),
+  4: require('../assets/audio/english/snake_poison/step5.wav'),
+  5: require('../assets/audio/english/snake_poison/step6.wav'),
+  6: require('../assets/audio/english/snake_poison/step7.wav'),
+  7: require('../assets/audio/english/snake_poison/step8.wav'),
+  8: require('../assets/audio/english/snake_poison/step9.wav'),
+  9: require('../assets/audio/english/snake_poison/step10.wav'),
+};
+
+
+
+
+
+
 const EmergencyGuideScreen = () => {
   const insets = useSafeAreaInsets();
   const { t, language } = useLanguage();
@@ -47,6 +135,113 @@ const EmergencyGuideScreen = () => {
   const [emergency, setEmergency] = useState<Emergency | null>(null);
   const [steps, setSteps] = useState<any[]>([]);
   const [title, setTitle] = useState('');
+
+  const soundRef = useRef<Audio.Sound | null>(null);
+  const playTokenRef = useRef<number>(0);
+  const stepProgress = useRef(new Animated.Value(0)).current;
+
+  const stopCurrentSound = async () => {
+    if (soundRef.current) {
+      const s = soundRef.current;
+      soundRef.current = null;
+      try {
+        await s.stopAsync();
+        await s.unloadAsync();
+      } catch {}
+    }
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+    const currentToken = ++playTokenRef.current;
+
+    const playStepAudio = async () => {
+      await stopCurrentSound();
+
+      if (!isMounted || currentToken !== playTokenRef.current) {
+        return;
+      }
+
+      const isBleeding = emergencyId === 'bleeding' || emergencyId === 'severe_bleeding';
+      const isBurns = emergencyId === 'burns';
+      const isShock = emergencyId === 'shock';
+      const isHeartAttack = emergencyId === 'heart_attack';
+      const isCpr = emergencyId === 'cpr';
+      const isSnakeBite = emergencyId === 'snake_bite';
+      const audioSource = isBleeding
+        ? severeBleedingAudios[currentStep]
+        : isBurns
+        ? burnsAudios[currentStep]
+        : isShock
+        ? shockAudios[currentStep]
+        : isHeartAttack
+        ? heartAttackAudios[currentStep]
+        : isCpr
+        ? (cprType === 'baby' ? cprBabyAudios[currentStep] : cprType === 'child' ? cprChildAudios[currentStep] : cprAdultAudios[currentStep])
+        : isSnakeBite
+        ? snakeBiteAudios[currentStep]
+        : null;
+
+      if (!audioSource) {
+        return;
+      }
+
+      try {
+        await Audio.setAudioModeAsync({
+          playsInSilentModeIOS: true,
+          shouldDuckAndroid: true,
+        });
+
+        if (!isMounted || currentToken !== playTokenRef.current) {
+          return;
+        }
+
+        const { sound } = await Audio.Sound.createAsync(
+          audioSource,
+          { shouldPlay: true, volume: 1.0 }
+        );
+
+        if (!isMounted || currentToken !== playTokenRef.current) {
+          await sound.unloadAsync().catch(() => {});
+          return;
+        }
+
+        soundRef.current = sound;
+      } catch {}
+    };
+
+    playStepAudio();
+
+    return () => {
+      isMounted = false;
+      stopCurrentSound();
+    };
+  }, [currentStep, emergencyId]);
+
+  useEffect(() => {
+    stepProgress.setValue(0);
+
+    if (steps.length === 0) return;
+
+    const anim = Animated.timing(stepProgress, {
+      toValue: 1,
+      duration: 10000,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    });
+
+    anim.start(({ finished }) => {
+      if (finished) {
+        if (currentStep < steps.length - 1) {
+          setCurrentStep((prev) => prev + 1);
+        }
+      }
+    });
+
+    return () => {
+      anim.stop();
+    };
+  }, [currentStep, steps.length]);
 
   useEffect(() => {
     const foundEmergency = emergenciesData.emergencies.find((e: any) => e.id === emergencyId);
@@ -102,7 +297,13 @@ const EmergencyGuideScreen = () => {
     }
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
+    await stopCurrentSound();
+    router.back();
+  };
+
+  const handleBack = async () => {
+    await stopCurrentSound();
     router.back();
   };
 
@@ -111,7 +312,7 @@ const EmergencyGuideScreen = () => {
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
         <View style={styles.header}>
-          <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
+          <AnimatedCard onPress={handleBack} style={styles.backButton}>
             <Ionicons name="arrow-back" size={22} color="#0F172A" />
           </AnimatedCard>
           <Text style={styles.headerTitle}>Loading...</Text>
@@ -121,8 +322,6 @@ const EmergencyGuideScreen = () => {
     );
   }
 
-  const progress = ((currentStep + 1) / steps.length) * 100;
-  
   const currentStepText = typeof steps[currentStep] === 'object' 
     ? (steps[currentStep][language] || steps[currentStep].en)
     : steps[currentStep];
@@ -135,7 +334,7 @@ const EmergencyGuideScreen = () => {
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
-        <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
+        <AnimatedCard onPress={handleBack} style={styles.backButton}>
           <Ionicons name="arrow-back" size={22} color="#0F172A" />
         </AnimatedCard>
         <Text style={styles.headerTitle} numberOfLines={1}>{title}</Text>
@@ -147,11 +346,39 @@ const EmergencyGuideScreen = () => {
           {t.guide.stepOf.replace('{{current}}', (currentStep + 1).toString()).replace('{{total}}', steps.length.toString())}
         </Text>
 
-        <View style={styles.progressBarContainer}>
-          <View style={[styles.progressBar, { width: `${progress}%` }]} />
+        <View style={styles.segmentedProgressContainer}>
+          {steps.map((_, index) => {
+            let widthInterpolation: any;
+            if (index < currentStep) {
+              widthInterpolation = '100%';
+            } else if (index === currentStep) {
+              widthInterpolation = stepProgress.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['0%', '100%'],
+              });
+            } else {
+              widthInterpolation = '0%';
+            }
+
+            return (
+              <View key={index} style={styles.segmentTrack}>
+                <Animated.View
+                  style={[
+                    styles.segmentFill,
+                    { width: widthInterpolation },
+                  ]}
+                />
+              </View>
+            );
+          })}
         </View>
 
-        {emergencyId === 'cpr' && currentStep === 4 ? (
+        {emergencyId === 'cpr' && (
+          (cprType === 'adult' && currentStep === 5) ||
+          (cprType === 'baby' && currentStep === 6) ||
+          (cprType === 'child' && currentStep === 4) ||
+          (!cprType && currentStep === 4)
+        ) ? (
           <CPRBeatCircle />
         ) : stepImage ? (
           <Image 
@@ -255,14 +482,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
   },
-  progressBarContainer: {
-    height: 6,
+  segmentedProgressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 24,
+    width: '100%',
+  },
+  segmentTrack: {
+    flex: 1,
+    height: 5,
     backgroundColor: '#F1F5F9',
     borderRadius: 3,
-    marginBottom: 24,
     overflow: 'hidden',
   },
-  progressBar: {
+  segmentFill: {
     height: '100%',
     backgroundColor: '#36D1B6',
     borderRadius: 3,
