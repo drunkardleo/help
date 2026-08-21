@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, Linking, StatusBar, Alert, Image,
   Animated, Pressable, Platform, PermissionsAndroid
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
@@ -18,6 +18,7 @@ import { PageTransition } from '../components/PageTransition';
 const CONTACTS_KEY = '@helpmate_sos_contacts';
 
 const HomeScreen = () => {
+  const insets = useSafeAreaInsets();
   const { t, language } = useLanguage();
 
   const holdAnim = useRef(new Animated.Value(0)).current;
@@ -170,10 +171,10 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <PageTransition>
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: 60 + insets.bottom }]} showsVerticalScrollIndicator={false}>
         
         {}
         <View style={styles.header}>
@@ -258,7 +259,7 @@ const HomeScreen = () => {
       </ScrollView>
       </PageTransition>
 
-      <View style={styles.floatingSosWrap}>
+      <View style={[styles.floatingSosWrap, { bottom: insets.bottom > 0 ? insets.bottom + 16 : 24 }]}>
         <Pressable
           onPressIn={handleSosPressIn}
           onPressOut={handleSosPressOut}

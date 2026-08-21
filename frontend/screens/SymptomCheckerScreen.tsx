@@ -7,9 +7,10 @@ import {
   Alert,
   StatusBar,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router } from 'expo-router';
@@ -29,6 +30,7 @@ interface SymptomOption {
 }
 
 const SymptomCheckerScreen = () => {
+  const insets = useSafeAreaInsets();
   const { t, language } = useLanguage();
   const [selectedSymptoms, setSelectedSymptoms] = useState<SymptomId[]>([]);
   const [triageResult, setTriageResult] = useState<SymptomCheckResult | null>(
@@ -144,7 +146,7 @@ const SymptomCheckerScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
         <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
@@ -155,10 +157,12 @@ const SymptomCheckerScreen = () => {
       </View>
 
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[
+          styles.scrollContent,
+          !triageResult && { paddingBottom: 100 + insets.bottom }
+        ]}
         showsVerticalScrollIndicator={false}
       >
-        {}
         {triageResult && triageResult.isCritical && (
           <View style={styles.criticalBanner}>
             <View style={styles.criticalBannerHeader}>
@@ -195,10 +199,8 @@ const SymptomCheckerScreen = () => {
           </View>
         )}
 
-        {}
         {triageResult && (
           <View style={styles.resultContainer}>
-            {}
             {triageResult.fallback && (
               <View style={styles.fallbackCard}>
                 <View style={styles.fallbackHeader}>
@@ -235,7 +237,6 @@ const SymptomCheckerScreen = () => {
               </View>
             )}
 
-            {}
             {triageResult.primary && (
               <View style={styles.resultCard}>
                 <View style={styles.resultHeaderRow}>
@@ -291,7 +292,6 @@ const SymptomCheckerScreen = () => {
               </View>
             )}
 
-            {}
             {triageResult.secondary && triageResult.secondary.length > 0 && (
               <View style={styles.secondarySection}>
                 <Text style={styles.secondarySectionTitle}>
@@ -335,7 +335,6 @@ const SymptomCheckerScreen = () => {
               </View>
             )}
 
-            {}
             <TouchableOpacity
               style={styles.resetButton}
               activeOpacity={0.8}
@@ -347,7 +346,6 @@ const SymptomCheckerScreen = () => {
           </View>
         )}
 
-        {}
         {!triageResult && (
           <>
             <Text style={styles.subtitle}>{t.symptoms.subtitle}</Text>
@@ -399,22 +397,26 @@ const SymptomCheckerScreen = () => {
                 );
               })}
             </View>
-
-            <AnimatedCard
-              style={[
-                styles.checkButton,
-                selectedSymptoms.length === 0 && styles.checkButtonDisabled
-              ]}
-              onPress={handleCheck}
-            >
-              <Text style={styles.checkButtonText}>
-                {t.symptoms.checkButton}
-              </Text>
-              <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
-            </AnimatedCard>
           </>
         )}
       </ScrollView>
+
+      {!triageResult && (
+        <View style={[styles.bottomBar, { paddingBottom: insets.bottom > 0 ? insets.bottom + 12 : 16 }]}>
+          <AnimatedCard
+            style={[
+              styles.checkButton,
+              selectedSymptoms.length === 0 && styles.checkButtonDisabled
+            ]}
+            onPress={handleCheck}
+          >
+            <Text style={styles.checkButtonText}>
+              {t.symptoms.checkButton}
+            </Text>
+            <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
+          </AnimatedCard>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -451,6 +453,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 40
+  },
+  scrollContentWithBottomBar: {
+    paddingBottom: 100
   },
   subtitle: {
     fontSize: 14,
@@ -832,6 +837,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#334155',
     fontWeight: '700'
+  },
+  bottomBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: Platform.OS === 'ios' ? 24 : 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F1F5F9',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 10
   }
 });
 

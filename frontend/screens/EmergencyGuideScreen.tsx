@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Linking, Image, StatusBar, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -37,6 +37,7 @@ const emergencyImages: Record<string, any> = {
 };
 
 const EmergencyGuideScreen = () => {
+  const insets = useSafeAreaInsets();
   const { t, language } = useLanguage();
   const params = useLocalSearchParams();
   const emergencyId = params.id as string;
@@ -107,7 +108,7 @@ const EmergencyGuideScreen = () => {
 
   if (!emergency || steps.length === 0) {
     return (
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
         <View style={styles.header}>
           <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
@@ -131,7 +132,7 @@ const EmergencyGuideScreen = () => {
   const stepImage = hasImage ? emergencyImages[currentStepData.image] : null;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
         <AnimatedCard onPress={() => router.back()} style={styles.backButton}>
@@ -141,7 +142,7 @@ const EmergencyGuideScreen = () => {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: 100 + insets.bottom }]} showsVerticalScrollIndicator={false}>
         <Text style={styles.stepIndicator}>
           {t.guide.stepOf.replace('{{current}}', (currentStep + 1).toString()).replace('{{total}}', steps.length.toString())}
         </Text>
@@ -201,7 +202,7 @@ const EmergencyGuideScreen = () => {
         </View>
       </ScrollView>
 
-      <View style={styles.bottomButtonContainer}>
+      <View style={[styles.bottomButtonContainer, { paddingBottom: insets.bottom > 0 ? insets.bottom + 12 : 16 }]}>
         <AnimatedCard style={styles.emergencyButton} onPress={handleEmergencyCall}>
           <Ionicons name="call" size={20} color="#FFFFFF" />
           <Text style={styles.emergencyButtonText}>{t.guide.callEmergency}</Text>
