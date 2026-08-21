@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, StatusBar,
   Pressable, TextInput, Alert, Platform, Animated,
-  PermissionsAndroid, NativeModules
+  PermissionsAndroid, Linking
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -128,6 +128,7 @@ const SOSScreen = () => {
 
     const coords = await getLocation();
     const numbers = contacts.map((c) => c.number);
+    const primaryNumber = contacts[0]?.number;
 
     let message = t.sos.smsBody;
     if (coords) {
@@ -137,9 +138,10 @@ const SOSScreen = () => {
     }
 
     try {
+      let smsSent = false;
       if (Platform.OS === 'android' && DirectSms) {
-        let hasPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.SEND_SMS);
-        if (!hasPermission) {
+        let hasSmsPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.SEND_SMS);
+        if (!hasSmsPermission) {
           const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.SEND_SMS,
             {
@@ -148,27 +150,58 @@ const SOSScreen = () => {
               buttonPositive: "Allow"
             }
           );
-          hasPermission = granted === PermissionsAndroid.RESULTS.GRANTED;
+          hasSmsPermission = granted === PermissionsAndroid.RESULTS.GRANTED;
         }
 
-        if (hasPermission) {
+        if (hasSmsPermission) {
           await DirectSms.sendDirectSms(numbers, message);
-          Alert.alert(
-            "🚨 SOS Sent",
-            "Emergency messages with your live location have been sent directly to your emergency contacts."
-          );
-          return;
+          smsSent = true;
         }
       }
 
-      const isAvailable = await SMS.isAvailableAsync();
-      if (Platform.OS === 'web' || !isAvailable) {
-        Alert.alert(t.sos.title, t.sos.smsNotAvailable + (coords ? `\n\n${message}` : ''));
-      } else {
-        await SMS.sendSMSAsync(numbers, message);
+      if (!smsSent) {
+        const isAvailable = await SMS.isAvailableAsync();
+        if (Platform.OS === 'web' || !isAvailable) {
+          Alert.alert(t.sos.title, t.sos.smsNotAvailable + (coords ? `\n\n${message}` : ''));
+        } else {
+          await SMS.sendSMSAsync(numbers, message);
+        }
+      }
+
+      if (primaryNumber) {
+        if (Platform.OS === 'android' && DirectSms?.makeDirectCall) {
+          let hasCallPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CALL_PHONE);
+          if (!hasCallPermission) {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.CALL_PHONE,
+              {
+                title: "Call Permission",
+                message: "HelpMate needs permission to automatically call your emergency contact during an SOS.",
+                buttonPositive: "Allow"
+              }
+            );
+            hasCallPermission = granted === PermissionsAndroid.RESULTS.GRANTED;
+          }
+
+          if (hasCallPermission) {
+            await DirectSms.makeDirectCall(primaryNumber);
+          } else {
+            const phoneUrl = `tel:${primaryNumber}`;
+            const canCall = await Linking.canOpenURL(phoneUrl);
+            if (canCall) {
+              await Linking.openURL(phoneUrl);
+            }
+          }
+        } else {
+          const phoneUrl = `tel:${primaryNumber}`;
+          const canCall = await Linking.canOpenURL(phoneUrl);
+          if (canCall) {
+            await Linking.openURL(phoneUrl);
+          }
+        }
       }
     } catch (e) {
-      console.error('SMS error:', e);
+      console.error('SOS error:', e);
       Alert.alert(t.sos.title, t.sos.smsFailed);
     } finally {
       setIsSending(false);
