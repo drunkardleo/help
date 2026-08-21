@@ -38,85 +38,85 @@ const emergencyImages: Record<string, any> = {
 };
 
 const severeBleedingAudios: Record<number, any> = {
-  0: require('../assets/audio/english/severe_bleeding/step1.wav'),
-  1: require('../assets/audio/english/severe_bleeding/step2.wav'),
-  2: require('../assets/audio/english/severe_bleeding/step3.wav'),
-  3: require('../assets/audio/english/severe_bleeding/step4.wav'),
-  4: require('../assets/audio/english/severe_bleeding/step5.wav'),
-  5: require('../assets/audio/english/severe_bleeding/step6.wav'),
+  0: require('../assets/audio/english/severe_bleeding/step1.mp3'),
+  1: require('../assets/audio/english/severe_bleeding/step2.mp3'),
+  2: require('../assets/audio/english/severe_bleeding/step3.mp3'),
+  3: require('../assets/audio/english/severe_bleeding/step4.mp3'),
+  4: require('../assets/audio/english/severe_bleeding/step5.mp3'),
+  5: require('../assets/audio/english/severe_bleeding/step6.mp3'),
 };
 
 const burnsAudios: Record<number, any> = {
-  0: require('../assets/audio/english/burns/step1.wav'),
-  1: require('../assets/audio/english/burns/step2.wav'),
-  2: require('../assets/audio/english/burns/step3.wav'),
-  3: require('../assets/audio/english/burns/step4.wav'),
-  4: require('../assets/audio/english/burns/step5.wav'),
-  5: require('../assets/audio/english/burns/step6.wav'),
-  6: require('../assets/audio/english/burns/step7.wav'),
+  0: require('../assets/audio/english/burns/step1.mp3'),
+  1: require('../assets/audio/english/burns/step2.mp3'),
+  2: require('../assets/audio/english/burns/step3.mp3'),
+  3: require('../assets/audio/english/burns/step4.mp3'),
+  4: require('../assets/audio/english/burns/step5.mp3'),
+  5: require('../assets/audio/english/burns/step6.mp3'),
+  6: require('../assets/audio/english/burns/step7.mp3'),
 };
 
 const shockAudios: Record<number, any> = {
-  0: require('../assets/audio/english/shock/step1.wav'),
-  1: require('../assets/audio/english/shock/step2.wav'),
-  2: require('../assets/audio/english/shock/step3.wav'),
-  3: require('../assets/audio/english/shock/step4.wav'),
-  4: require('../assets/audio/english/shock/step5.wav'),
-  5: require('../assets/audio/english/shock/step6.wav'),
-  6: require('../assets/audio/english/shock/step7.wav'),
+  0: require('../assets/audio/english/shock/step1.mp3'),
+  1: require('../assets/audio/english/shock/step2.mp3'),
+  2: require('../assets/audio/english/shock/step3.mp3'),
+  3: require('../assets/audio/english/shock/step4.mp3'),
+  4: require('../assets/audio/english/shock/step5.mp3'),
+  5: require('../assets/audio/english/shock/step6.mp3'),
+  6: require('../assets/audio/english/shock/step7.mp3'),
 };
 
 const heartAttackAudios: Record<number, any> = {
-  0: require('../assets/audio/english/heart_attack/step1.wav'),
-  1: require('../assets/audio/english/heart_attack/step2.wav'),
-  2: require('../assets/audio/english/heart_attack/step3.wav'),
-  3: require('../assets/audio/english/heart_attack/step4.wav'),
-  4: require('../assets/audio/english/heart_attack/step5.wav'),
-  5: require('../assets/audio/english/heart_attack/step6.wav'),
-  6: require('../assets/audio/english/heart_attack/step7.wav'),
+  0: require('../assets/audio/english/heart_attack/step1.mp3'),
+  1: require('../assets/audio/english/heart_attack/step2.mp3'),
+  2: require('../assets/audio/english/heart_attack/step3.mp3'),
+  3: require('../assets/audio/english/heart_attack/step4.mp3'),
+  4: require('../assets/audio/english/heart_attack/step5.mp3'),
+  5: require('../assets/audio/english/heart_attack/step6.mp3'),
+  6: require('../assets/audio/english/heart_attack/step7.mp3'),
 };
 
 const cprAdultAudios: Record<number, any> = {
-  0: require('../assets/audio/english/cpr/adult/step1.wav'),
-  1: require('../assets/audio/english/cpr/adult/step2.wav'),
-  2: require('../assets/audio/english/cpr/adult/step3.wav'),
-  3: require('../assets/audio/english/cpr/adult/step4.wav'),
-  4: require('../assets/audio/english/cpr/adult/step5.wav'),
-  5: require('../assets/audio/english/cpr/adult/step6.wav'),
-  6: require('../assets/audio/english/cpr/adult/step7.wav'),
+  0: require('../assets/audio/english/cpr/adult/step1.mp3'),
+  1: require('../assets/audio/english/cpr/adult/step2.mp3'),
+  2: require('../assets/audio/english/cpr/adult/step3.mp3'),
+  3: require('../assets/audio/english/cpr/adult/step4.mp3'),
+  4: require('../assets/audio/english/cpr/adult/step5.mp3'),
+  5: require('../assets/audio/english/cpr/adult/step6.mp3'),
+  6: require('../assets/audio/english/cpr/adult/step7.mp3'),
 };
 
 const cprChildAudios: Record<number, any> = {
-  0: require('../assets/audio/english/cpr/child/step1.wav'),
-  1: require('../assets/audio/english/cpr/child/step2.wav'),
-  2: require('../assets/audio/english/cpr/child/step3.wav'),
-  3: require('../assets/audio/english/cpr/child/step4.wav'),
-  4: require('../assets/audio/english/cpr/child/step5.wav'),
-  5: require('../assets/audio/english/cpr/child/step6.wav'),
-  6: require('../assets/audio/english/cpr/child/step7.wav'),
+  0: require('../assets/audio/english/cpr/child/step1.mp3'),
+  1: require('../assets/audio/english/cpr/child/step2.mp3'),
+  2: require('../assets/audio/english/cpr/child/step3.mp3'),
+  3: require('../assets/audio/english/cpr/child/step4.mp3'),
+  4: require('../assets/audio/english/cpr/child/step5.mp3'),
+  5: require('../assets/audio/english/cpr/child/step6.mp3'),
+  6: require('../assets/audio/english/cpr/child/step7.mp3'),
 };
 
 const cprBabyAudios: Record<number, any> = {
-  0: require('../assets/audio/english/cpr/baby/step1.wav'),
-  1: require('../assets/audio/english/cpr/baby/step2.wav'),
-  2: require('../assets/audio/english/cpr/baby/step3.wav'),
-  3: require('../assets/audio/english/cpr/baby/step4.wav'),
-  4: require('../assets/audio/english/cpr/baby/step5.wav'),
-  5: require('../assets/audio/english/cpr/baby/step6.wav'),
-  6: require('../assets/audio/english/cpr/baby/step7.wav'),
+  0: require('../assets/audio/english/cpr/baby/step1.mp3'),
+  1: require('../assets/audio/english/cpr/baby/step2.mp3'),
+  2: require('../assets/audio/english/cpr/baby/step3.mp3'),
+  3: require('../assets/audio/english/cpr/baby/step4.mp3'),
+  4: require('../assets/audio/english/cpr/baby/step5.mp3'),
+  5: require('../assets/audio/english/cpr/baby/step6.mp3'),
+  6: require('../assets/audio/english/cpr/baby/step7.mp3'),
 };
 
 const snakeBiteAudios: Record<number, any> = {
-  0: require('../assets/audio/english/snake_poison/step1.wav'),
-  1: require('../assets/audio/english/snake_poison/step2.wav'),
-  2: require('../assets/audio/english/snake_poison/step3.wav'),
-  3: require('../assets/audio/english/snake_poison/step4.wav'),
-  4: require('../assets/audio/english/snake_poison/step5.wav'),
-  5: require('../assets/audio/english/snake_poison/step6.wav'),
-  6: require('../assets/audio/english/snake_poison/step7.wav'),
-  7: require('../assets/audio/english/snake_poison/step8.wav'),
-  8: require('../assets/audio/english/snake_poison/step9.wav'),
-  9: require('../assets/audio/english/snake_poison/step10.wav'),
+  0: require('../assets/audio/english/snake_poison/step1.mp3'),
+  1: require('../assets/audio/english/snake_poison/step2.mp3'),
+  2: require('../assets/audio/english/snake_poison/step3.mp3'),
+  3: require('../assets/audio/english/snake_poison/step4.mp3'),
+  4: require('../assets/audio/english/snake_poison/step5.mp3'),
+  5: require('../assets/audio/english/snake_poison/step6.mp3'),
+  6: require('../assets/audio/english/snake_poison/step7.mp3'),
+  7: require('../assets/audio/english/snake_poison/step8.mp3'),
+  8: require('../assets/audio/english/snake_poison/step9.mp3'),
+  9: require('../assets/audio/english/snake_poison/step10.mp3'),
 };
 
 
@@ -225,7 +225,7 @@ const EmergencyGuideScreen = () => {
 
     const anim = Animated.timing(stepProgress, {
       toValue: 1,
-      duration: 10000,
+      duration: 15000,
       easing: Easing.linear,
       useNativeDriver: false,
     });

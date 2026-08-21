@@ -25,12 +25,12 @@ const languages: LangOption[] = [
 ];
 
 const audioFiles: Record<string, any> = {
-  en: require('../assets/audio/english.wav'),
-  hi: require('../assets/audio/hindi.wav'),
-  mr: require('../assets/audio/marathi.wav'),
-  mai: require('../assets/audio/maithili.wav'),
-  bho: require('../assets/audio/bhojpuri.wav'),
-  bn: require('../assets/audio/bengali.wav'),
+  en: require('../assets/audio/english.mp3'),
+  hi: require('../assets/audio/hindi.mp3'),
+  mr: require('../assets/audio/marathi.mp3'),
+  mai: require('../assets/audio/maithili.mp3'),
+  bho: require('../assets/audio/bhojpuri.mp3'),
+  bn: require('../assets/audio/bengali.mp3'),
 };
 
 const LanguageSelectionScreen = () => {
