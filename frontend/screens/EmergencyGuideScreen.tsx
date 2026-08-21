@@ -54,6 +54,14 @@ const severeBleedingAudios: Record<string, Record<number, any>> = {
     4: require('../assets/audio/hindi/severe_bleeding/step5.mp3'),
     5: require('../assets/audio/hindi/severe_bleeding/step6.mp3'),
   },
+  mr: {
+    0: require('../assets/audio/marathi/severe_bleeding/step1.mp3'),
+    1: require('../assets/audio/marathi/severe_bleeding/step2.mp3'),
+    2: require('../assets/audio/marathi/severe_bleeding/step3.mp3'),
+    3: require('../assets/audio/marathi/severe_bleeding/step4.mp3'),
+    4: require('../assets/audio/marathi/severe_bleeding/step5.mp3'),
+    5: require('../assets/audio/marathi/severe_bleeding/step6.mp3'),
+  },
 };
 
 const burnsAudios: Record<string, Record<number, any>> = {
@@ -74,6 +82,15 @@ const burnsAudios: Record<string, Record<number, any>> = {
     4: require('../assets/audio/hindi/burns/step5.mp3'),
     5: require('../assets/audio/hindi/burns/step6.mp3'),
     6: require('../assets/audio/hindi/burns/step7.mp3'),
+  },
+  mr: {
+    0: require('../assets/audio/marathi/burns/step1.mp3'),
+    1: require('../assets/audio/marathi/burns/step2.mp3'),
+    2: require('../assets/audio/marathi/burns/step3.mp3'),
+    3: require('../assets/audio/marathi/burns/step4.mp3'),
+    4: require('../assets/audio/marathi/burns/step5.mp3'),
+    5: require('../assets/audio/marathi/burns/step6.mp3'),
+    6: require('../assets/audio/marathi/burns/step7.mp3'),
   },
 };
 
@@ -96,6 +113,15 @@ const shockAudios: Record<string, Record<number, any>> = {
     5: require('../assets/audio/hindi/shock/step6.mp3'),
     6: require('../assets/audio/hindi/shock/step7.mp3'),
   },
+  mr: {
+    0: require('../assets/audio/marathi/shock/step1.mp3'),
+    1: require('../assets/audio/marathi/shock/step2.mp3'),
+    2: require('../assets/audio/marathi/shock/step3.mp3'),
+    3: require('../assets/audio/marathi/shock/step4.mp3'),
+    4: require('../assets/audio/marathi/shock/step5.mp3'),
+    5: require('../assets/audio/marathi/shock/step6.mp3'),
+    6: require('../assets/audio/marathi/shock/step7.mp3'),
+  },
 };
 
 const heartAttackAudios: Record<string, Record<number, any>> = {
@@ -116,6 +142,15 @@ const heartAttackAudios: Record<string, Record<number, any>> = {
     4: require('../assets/audio/hindi/heart_attack/step5.mp3'),
     5: require('../assets/audio/hindi/heart_attack/step6.mp3'),
     6: require('../assets/audio/hindi/heart_attack/step7.mp3'),
+  },
+  mr: {
+    0: require('../assets/audio/marathi/heart_attack/step1.mp3'),
+    1: require('../assets/audio/marathi/heart_attack/step2.mp3'),
+    2: require('../assets/audio/marathi/heart_attack/step3.mp3'),
+    3: require('../assets/audio/marathi/heart_attack/step4.mp3'),
+    4: require('../assets/audio/marathi/heart_attack/step5.mp3'),
+    5: require('../assets/audio/marathi/heart_attack/step6.mp3'),
+    6: require('../assets/audio/marathi/heart_attack/step7.mp3'),
   },
 };
 
@@ -138,6 +173,15 @@ const cprAdultAudios: Record<string, Record<number, any>> = {
     5: require('../assets/audio/hindi/cpr/adult/step6.mp3'),
     6: require('../assets/audio/hindi/cpr/adult/step7.mp3'),
   },
+  mr: {
+    0: require('../assets/audio/marathi/cpr/adult/step1.mp3'),
+    1: require('../assets/audio/marathi/cpr/adult/step2.mp3'),
+    2: require('../assets/audio/marathi/cpr/adult/step3.mp3'),
+    3: require('../assets/audio/marathi/cpr/adult/step4.mp3'),
+    4: require('../assets/audio/marathi/cpr/adult/step5.mp3'),
+    5: require('../assets/audio/marathi/cpr/adult/step6.mp3'),
+    6: require('../assets/audio/marathi/cpr/adult/step7.mp3'),
+  },
 };
 
 const cprChildAudios: Record<string, Record<number, any>> = {
@@ -159,6 +203,15 @@ const cprChildAudios: Record<string, Record<number, any>> = {
     5: require('../assets/audio/hindi/cpr/child/step6.mp3'),
     6: require('../assets/audio/hindi/cpr/child/step7.mp3'),
   },
+  mr: {
+    0: require('../assets/audio/marathi/cpr/child/step1.mp3'),
+    1: require('../assets/audio/marathi/cpr/child/step2.mp3'),
+    2: require('../assets/audio/marathi/cpr/child/step3.mp3'),
+    3: require('../assets/audio/marathi/cpr/child/step4.mp3'),
+    4: require('../assets/audio/marathi/cpr/child/step5.mp3'),
+    5: require('../assets/audio/marathi/cpr/child/step6.mp3'),
+    6: require('../assets/audio/marathi/cpr/child/step7.mp3'),
+  },
 };
 
 const cprBabyAudios: Record<string, Record<number, any>> = {
@@ -179,6 +232,15 @@ const cprBabyAudios: Record<string, Record<number, any>> = {
     4: require('../assets/audio/hindi/cpr/baby/step5.mp3'),
     5: require('../assets/audio/hindi/cpr/baby/step6.mp3'),
     6: require('../assets/audio/hindi/cpr/baby/step7.mp3'),
+  },
+  mr: {
+    0: require('../assets/audio/marathi/cpr/baby/step1.mp3'),
+    1: require('../assets/audio/marathi/cpr/baby/step2.mp3'),
+    2: require('../assets/audio/marathi/cpr/baby/step3.mp3'),
+    3: require('../assets/audio/marathi/cpr/baby/step4.mp3'),
+    4: require('../assets/audio/marathi/cpr/baby/step5.mp3'),
+    5: require('../assets/audio/marathi/cpr/baby/step6.mp3'),
+    6: require('../assets/audio/marathi/cpr/baby/step7.mp3'),
   },
 };
 
@@ -206,6 +268,18 @@ const snakeBiteAudios: Record<string, Record<number, any>> = {
     7: require('../assets/audio/hindi/snake_poison/step8.mp3'),
     8: require('../assets/audio/hindi/snake_poison/step9.mp3'),
     9: require('../assets/audio/hindi/snake_poison/step10.mp3'),
+  },
+  mr: {
+    0: require('../assets/audio/marathi/snake_poison/step1.mp3'),
+    1: require('../assets/audio/marathi/snake_poison/step2.mp3'),
+    2: require('../assets/audio/marathi/snake_poison/step3.mp3'),
+    3: require('../assets/audio/marathi/snake_poison/step4.mp3'),
+    4: require('../assets/audio/marathi/snake_poison/step5.mp3'),
+    5: require('../assets/audio/marathi/snake_poison/step6.mp3'),
+    6: require('../assets/audio/marathi/snake_poison/step7.mp3'),
+    7: require('../assets/audio/marathi/snake_poison/step8.mp3'),
+    8: require('../assets/audio/marathi/snake_poison/step9.mp3'),
+    9: require('../assets/audio/marathi/snake_poison/step10.mp3'),
   },
 };
 
@@ -252,7 +326,7 @@ const EmergencyGuideScreen = () => {
         return;
       }
 
-      const activeLang = language === 'hi' ? 'hi' : 'en';
+      const activeLang = language;
       const isBleeding = emergencyId === 'bleeding' || emergencyId === 'severe_bleeding';
       const isBurns = emergencyId === 'burns';
       const isShock = emergencyId === 'shock';

@@ -90,3 +90,4 @@ android/build/
 dumb.md
 frontend/scripts/reset-project.js
 scripts/removeComments.js
+frontend/scripts/compress_audio.py
