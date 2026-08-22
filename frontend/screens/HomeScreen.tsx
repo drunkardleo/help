@@ -236,10 +236,10 @@ const HomeScreen = () => {
             </Text>
           </AnimatedCard>
 
-          {/* Card 3: Snake Information */}
+          {/* Card 3: Snake Identification */}
           <AnimatedCard 
             style={styles.quickActionCard}
-            onPress={() => router.push('/emergency-guide?id=snake_bite')}
+            onPress={() => router.push('/snake-identification')}
           >
             <View style={[styles.actionIconCircle, { backgroundColor: '#ECFDF5' }]}>
               <MaterialCommunityIcons name="snake" size={32} color="#16A34A" />
