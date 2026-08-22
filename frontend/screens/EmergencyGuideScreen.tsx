@@ -607,7 +607,7 @@ const EmergencyGuideScreen = () => {
 
     const anim = Animated.timing(stepProgress, {
       toValue: 1,
-      duration: 15000,
+      duration: 20000,
       easing: Easing.linear,
       useNativeDriver: false,
     });
