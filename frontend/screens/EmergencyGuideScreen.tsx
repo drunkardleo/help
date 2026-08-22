@@ -35,6 +35,23 @@ const emergencyImages: Record<string, any> = {
   severe_bleeding_step_5: require('../assets/images/bleeding/severe_bleeding_step_5.jpeg'),
   severe_bleeding_step_6: require('../assets/images/bleeding/severe_bleeding_step_6.jpg'),
   severe_bleeding_step_7: require('../assets/images/bleeding/severe_bleeding_step_7.jpg'),
+  burns_step1: require('../assets/images/burns/Burn1.png'),
+  burns_step2: require('../assets/images/burns/Burn2.png'),
+  burns_step3: require('../assets/images/burns/Burn3.png'),
+  burns_step4: require('../assets/images/burns/Burn4.png'),
+  burns_step5: require('../assets/images/burns/Burn5.png'),
+  burns_step6: require('../assets/images/burns/Burn6.png'),
+  burns_step7: require('../assets/images/burns/Burn7.png'),
+  snake_bite_step1: require('../assets/images/snake_poison/Snake bite 1.png'),
+  snake_bite_step2: require('../assets/images/snake_poison/Snake bite 2 .png'),
+  snake_bite_step3: require('../assets/images/snake_poison/Snake bite 3.png'),
+  snake_bite_step4: require('../assets/images/snake_poison/Snake bite 4.png'),
+  snake_bite_step5: require('../assets/images/snake_poison/snake bite 5.png'),
+  snake_bite_step6: require('../assets/images/snake_poison/Snake bite 6.png'),
+  snake_bite_step7: require('../assets/images/snake_poison/Snake bite 7.png'),
+  snake_bite_step8: require('../assets/images/snake_poison/Snake bite 8.png'),
+  snake_bite_step9: require('../assets/images/snake_poison/Snake bite 9.png'),
+  snake_bite_step10: require('../assets/images/snake_poison/Snake bite 10 .png'),
 };
 
 const severeBleedingAudios: Record<string, Record<number, any>> = {
@@ -894,8 +911,9 @@ const styles = StyleSheet.create({
   },
   stepImage: {
     width: '100%',
-    height: 200,
+    height: 250,
     borderRadius: 20,
+    overflow: 'hidden',
     marginBottom: 24,
   },
   placeholderText: {

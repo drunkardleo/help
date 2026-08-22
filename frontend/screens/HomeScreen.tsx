@@ -205,54 +205,66 @@ const HomeScreen = () => {
         {}
         <Text style={styles.disclaimer}>{t.home.disclaimer}</Text>
 
-        {}
+        {/* Quick Actions */}
         <Text style={styles.sectionTitle}>{t.home.quickActions}</Text>
         <View style={styles.quickActionsContainer}>
-          {}
+          {/* Card 1: All Emergencies */}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/all-emergencies')}
           >
             <View style={[styles.actionIconCircle, { backgroundColor: '#FEE2E2' }]}>
-              <Ionicons name="alert-circle" size={30} color="#DC2626" />
+              <Ionicons name="alert-circle-outline" size={32} color="#DC2626" />
             </View>
-            <Text style={styles.quickActionText}>{t.home.allEmergencies}</Text>
+            <Text style={styles.quickActionTitle}>{t.home.allEmergencies}</Text>
+            <Text style={styles.quickActionDesc}>
+              {t.home.allEmergenciesDesc || 'Get information about different types of emergency situations'}
+            </Text>
           </AnimatedCard>
 
-          {}
+          {/* Card 2: Check Symptoms */}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/symptom-checker')}
           >
-            <View style={[styles.actionIconCircle, { backgroundColor: '#DBEAFE' }]}>
+            <View style={[styles.actionIconCircle, { backgroundColor: '#EFF6FF' }]}>
               <MaterialCommunityIcons name="stethoscope" size={30} color="#2563EB" />
             </View>
-            <Text style={styles.quickActionText}>{t.home.checkSymptoms}</Text>
+            <Text style={styles.quickActionTitle}>{t.home.checkSymptoms}</Text>
+            <Text style={styles.quickActionDesc}>
+              {t.home.checkSymptomsDesc || 'Enter your symptoms and learn about possible conditions'}
+            </Text>
           </AnimatedCard>
 
-          {}
+          {/* Card 3: Snake Information */}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={() => router.push('/emergency-guide?id=snake_bite')}
           >
-            <View style={[styles.actionIconCircle, { backgroundColor: '#DCFCE7' }]}>
-              <MaterialCommunityIcons name="snake" size={30} color="#16A34A" />
+            <View style={[styles.actionIconCircle, { backgroundColor: '#ECFDF5' }]}>
+              <MaterialCommunityIcons name="snake" size={32} color="#16A34A" />
             </View>
-            <Text style={styles.quickActionText}>
-              {t.home.snakePoisoning || 'Snake Poisoning'}
+            <Text style={styles.quickActionTitle}>
+              {t.home.snakePoisoning || 'Snake Information'}
+            </Text>
+            <Text style={styles.quickActionDesc}>
+              {t.home.snakeInfoDesc || 'Learn about snake identification, types, and basic first aid'}
             </Text>
           </AnimatedCard>
 
-          {}
+          {/* Card 4: Diet for Diseases */}
           <AnimatedCard 
             style={styles.quickActionCard}
             onPress={handleDummyAction}
           >
-            <View style={[styles.actionIconCircle, { backgroundColor: '#FEF3C7' }]}>
-              <MaterialCommunityIcons name="food-apple" size={28} color="#D97706" />
+            <View style={[styles.actionIconCircle, { backgroundColor: '#FFF7ED' }]}>
+              <MaterialCommunityIcons name="food-apple" size={30} color="#EA580C" />
             </View>
-            <Text style={styles.quickActionText}>
-              {t.home.dummyAction || 'More'}
+            <Text style={styles.quickActionTitle}>
+              {t.home.dietForDiseases || t.home.dummyAction || 'Diet for Diseases'}
+            </Text>
+            <Text style={styles.quickActionDesc}>
+              {t.home.dietForDiseasesDesc || 'Learn what to eat and what to avoid for different diseases'}
             </Text>
           </AnimatedCard>
         </View>
@@ -388,39 +400,44 @@ const styles = StyleSheet.create({
   },
   quickActionCard: {
     width: '48%',
-    height: 136,
+    minHeight: 188,
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 12,
-    borderRadius: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 18,
+    borderRadius: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderWidth: 1,
     borderColor: '#F1F5F9',
-    gap: 10,
     shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.07,
+    shadowRadius: 10,
+    elevation: 3,
   },
   actionIconCircle: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 1,
+    marginBottom: 10,
   },
-  quickActionText: {
-    fontSize: 14.5,
+  quickActionTitle: {
+    fontSize: 15,
     fontWeight: '800',
     color: '#0F172A',
     textAlign: 'center',
     letterSpacing: -0.2,
+    marginBottom: 4,
+  },
+  quickActionDesc: {
+    fontSize: 11,
+    fontWeight: '400',
+    color: '#64748B',
+    textAlign: 'center',
+    lineHeight: 15,
+    paddingHorizontal: 2,
   },
   floatingSosWrap: {
     position: 'absolute',
